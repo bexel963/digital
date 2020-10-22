@@ -19,6 +19,7 @@ public class 약수문제 {
 		Scanner scan = new Scanner(System.in);
 		
 		int i, num;
+		int count = 0;
 		
 		System.out.print("수를 입력 하세요 : ");
 		num = scan.nextInt();
@@ -30,6 +31,23 @@ public class 약수문제 {
 				System.out.print(i + " ");
 			}
 		}	
+		System.out.println();
 		
+		System.out.print("수를 입력 하세요 : ");
+		num = scan.nextInt();
+		
+		for( i = 1 ; i <= num ; i++) {
+			if( num % i == 0) {
+				count = count +1;
+			}
+		}
+			if( count == 2 ) {
+				System.out.println(num + "은 소수");
+			}else {
+				System.out.println(num + "은 소수 아님");
+			}
+
 	}
+		
+	
 }
