@@ -1,6 +1,6 @@
 package day5;
 
-public class 배열1 {
+public class 배열1_배열생성 {
 
 	public static void main(String[] args) {
 		/* - 배열 : 같은 타입, 같은 의미의 변수들의 집합. (참조변수)	->	배열은 반복문을 이용할 수 있기 때문에 편리하다.

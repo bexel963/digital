@@ -2,7 +2,7 @@ package day5;
 
 import java.util.Scanner;
 
-public class 배열2 {
+public class 배열2_배열복사 {
 
 	public static void main(String[] args) {
 		/* 배열 복사
