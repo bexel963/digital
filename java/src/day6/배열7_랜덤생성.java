@@ -5,6 +5,14 @@ public class 배열7_랜덤생성 {
 	public static void main(String[] args) {
 		/* 5개짜리 배열에 랜덤으로 값을 생성하여 저장한 후 출력하는 예제 
 		 * 단, 10~20사이의 랜덤한 수
+		 * 
+		 * */
+		
+		/* <랜덤생성 메소드 공식>
+		 * 0 <= Math.random() < 1
+		 * 0 <= (B-A+1)*Math.random() < B-A+1
+		 * A <= (B-A+1)*Math.random()+A < B+1 
+		 *
 		 * */
 		
 		int min = 10, max = 20;

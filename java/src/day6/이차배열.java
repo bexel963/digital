@@ -10,8 +10,8 @@ public class 이차배열 {
 		
 		int arr[][] = new int[5][3];
 		int cnt = 1;
-		for(int i=0 ; i<arr.length ; i++) {
-			for(int j=0 ; j<arr[0].length ; j++) {
+		for(int i=0 ; i<arr.length ; i++) {					// 주로 행, arr의 행의 갯수 -> 5
+			for(int j=0 ; j<arr[0].length ; j++) {			// 주로 열, arr[0]번째 행의 열의 갯수 -> 3
 				arr[i][j] = cnt;
 				System.out.print(arr[i][j] + " ");
 				cnt++;
