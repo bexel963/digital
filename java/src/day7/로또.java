@@ -5,10 +5,27 @@ public class 로또 {
 	public static void main(String[] args) {
 		
 		int[] lotto = new int[7];	// 당첨번호, 6번지가 보너스번호
-		int min = 1, max = 45;
-		randomArray( lotto, min, max );
+		int[] user = new int[6];
+		int min = 1, max = 10;
+		randomArray(lotto, min, max);
 		printArray(lotto);
+		randomArray(user, min, max);
+		printArray(user);
+		int rank = lottoRank(lotto, user);
 		
+		if( rank == -1 ) {
+			System.out.println("꽝 입니다. 다음기회에...");
+		}else {
+			System.out.println(rank + "등 입니다. ");
+		}
+		
+		switch(rank) {
+		case 1: case 2: case 3: case 4: case 5:
+			System.out.println(rank + "등 입니다.");
+			break;
+		default:
+			System.out.println("꽝 입니다. 다음기회에...");
+		}
 	}
 	
 	//랜덤 값 출력
@@ -71,5 +88,41 @@ public class 로또 {
 		}
 		return false;
 	}
-	
+
+	/* 기능: 로또번호의 등수를 알려주는 메소드		=> 사용자가 자동으로 생성한 번호가 몇등인지 알려주는 메소드 (단, 등수에 없으면 -1을 알려줌)
+	 * 매개변수 : 로또번호, 사용자번호	=>	int []lotto, int []user
+	 * 리턴타입 : 담청등수	=>	int
+	 * 메소드명 : lottoRank
+	 * 
+	 * 
+	 * */
+	static int lottoRank(int []lotto, int []user) {
+		if(lotto.length <= user.length) {
+			System.out.println("꽝 입니다.");
+		}
+		int cnt = 0;	//	로또번호와 일치하는 사용자 번호 개수( 단, 보너스 번호는 제외)
+		for(int i=0 ; i<user.length ; i++) {				// 마지막 숫자(보너스 번호) 제외하기 위해 user배열 수 만큼만 비교한다.
+			//로또번호에서 하나 꺼낸 번호가 사용자 번호에 있는지 확인하여 있으면 개수를 증가, 없으면 아무것도 안함.
+			if(isContain(user, lotto[i])) {
+				cnt++;
+			}
+		}
+		switch(cnt) {
+		case 6 : return 1;				//	1의 값을 바로 리턴하니까 break; 필요 없음.
+		case 5 :
+			return isContain(user, lotto[lotto.length-1]) ? 2 : 3;
+			/*
+			if(isContain(user, lotto[lotto.length-1]))
+				return 2;
+			else
+				return 3;
+			*/
+		case 4 : return 4;
+		case 3 : return 5;
+		default : return -1;
+		}
+		
+		//return -1;	->	 default가 나머지 값을 처리하기 때문에 이거는 에러남.			
+		
+	}
 }
