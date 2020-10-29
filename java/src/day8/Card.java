@@ -51,6 +51,7 @@ public class Card {
 		else {
 			this.num = num;
 		}
+		
 	}
 
 	public char getShape() {

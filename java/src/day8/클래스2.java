@@ -20,7 +20,7 @@ public class 클래스2 {
 		//tmp.print();
 		//tmp = cp.pick();
 		//tmp.print();
-		
+	
 		cp.shuffle();
 		Card tmp;
 		for(int i=1 ; i<=4 ; i++) {
@@ -30,6 +30,7 @@ public class 클래스2 {
 			}
 			System.out.println();
 		}
+		
 	
 	}
 }
@@ -90,7 +91,7 @@ class CardPack {
 				Card tmp = new Card();		//	카드 1장 생성			//Card.java파일로 가서 Card 생성자로 초기화.
 				tmp.setNum(j);
 				tmp.setShape(shape);		
-				pack[cnt] = tmp;			// 카드팩에 카드를 추가
+				pack[cnt] = tmp;		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             	// 카드팩에 카드를 추가
 				cnt++;						// 카드팩에 들어있는 카드 개수 증가
 			}
 		}
