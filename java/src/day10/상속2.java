@@ -49,7 +49,6 @@ class Animal {									// 여기에 final을 붙이면 상속 할 수 없기 때
 	}
 
 	public Animal(String name, String category) {
-		super();
 		this.name = name;
 		this.category = category;
 	}
@@ -59,7 +58,7 @@ class Animal {									// 여기에 final을 붙이면 상속 할 수 없기 때
 }
 
 class Tiger extends Animal {
-	// super();					-> 부모의 기본 생성자가 자동으로 추가되는데 부모 클래스에 또 다른 생성자 만들어주면 부모 클래스에 기본 생성자 만들어 넣어줘야함. (56번줄)
+	// super();					-> 부모의 기본 생성자가 자동으로 추가되는데 부모 클래스에 또 다른 생성자 만들어주면 부모 클래스에 기본 생성자 만들어 넣어줘야함. (55번줄)
 	public Tiger() {
 		super("호랑이", "고양이과");	// -> super는 부모를 가르키는 참조변수, super()는 부모 클래스의 생성자
 //		category = "고양이과";		-> 부모의 멤버변수가 private라 이렇게 하면 안됨.
