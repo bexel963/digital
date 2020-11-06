@@ -99,5 +99,9 @@ public class Subject {
 	
 	public Subject() {}
 	
+	public Subject(String subjectTitle) {
+		this.subjectTitle = subjectTitle;
+	}
+	
 	
 }

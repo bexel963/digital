@@ -77,14 +77,19 @@ public class Student {
 		this.term = term;
 		subjectList = new Subject[2];	///////////////////////////////
 	}
+	
+	public Student() {}
+	
 	//수강 과목 추가
 	public void insertSubject(Subject subject) {				// 멤버변수의 값을 설정할때에는 리턴 타입이 거의 void 이다.
 		if(subjectCount == subjectList.length) {				// 배열이 꽉 찬경우 배열을 늘려주고 복사하는 작업
-			
-		}else {
-			subjectList[subjectCount] = subject;
-			subjectCount++;
+			Subject [] tmp = new Subject[subjectCount+10];
+			System.arraycopy(subjectList, 0, tmp, 0, subjectList.length);
+			subjectList = tmp;
 		}
+		subjectList[subjectCount] = subject;
+		subjectCount++;
+		
 	}
 	
 	//수강 과목 삭제
