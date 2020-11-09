@@ -11,9 +11,9 @@ public class CollectionEx2 {
 		list.add(new Point(1,3));
 		list.add(new Point(2,3));
 		list.add(new Point(3,3));
-		list.remove(new Point(1,1));						// 클래스의 객체를 저장하는 경우에는 참조변수를 비교해서 equals()를 오버라이딩 해야함.
+		list.remove(new Point(1,1));						// 클래스의 객체를 저장하는 경우에는 참조변수를 비교하기때문에 equals()를 오버라이딩 해야함.
 		printList(list);
-		System.out.println(list.indexOf(new Point(3,3)));	// 클래스의 객체를 저장하는 경우에는 참조변수를 비교해서 equals()를 오버라이딩 해야함.
+		System.out.println(list.indexOf(new Point(3,3)));	// 클래스의 객체를 저장하는 경우에는 참조변수를 비교하기때문에 equals()를 오버라이딩 해야함.
 	}
 	public static void printList(ArrayList list) {	
 		for(Object tmp : list) {
