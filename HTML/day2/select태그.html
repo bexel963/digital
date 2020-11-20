@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        select 태그 : 제시된 항목 중 하나를 선택하게 하는 태그, 혼자 사용 안되고 option태그와 같이 사용된다.
+        option태그의 속성 value : 해당 option 태그가 선택 되었을 때 전송되는 값
+        option태그의 속성 value가 없으면 option태그 안에 있는 문자열이 값으로 전송된다.
+     -->
+    <form action="">
+        <select name="year" id="">
+            <option value="">출생년도</option>       <!-- 출생년도가 선택하면 빈 문자열이 전송된다.-->
+            <option>2020</option>                   <!-- 2020이 전송된다.-->
+            <option>2019</option>
+            <option>2018</option>
+            <option value="2017">2017</option>
+        </select>
+        <button type="submit">전송</button>
+    </form>
+</body>
+</html>
