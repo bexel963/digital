@@ -13,13 +13,13 @@
     -->
     
     <input type="text" placeholder="미리보기">           <!-- type = "text" : 가장 많이 사용되고, 영문, 한글, 특수문자 등의 문자열을 입력 할 수 있다. -->
+
     <!-- 
         type = "button" : 일반 버튼
         type = "reset" : 리셋 버튼   - 같은 form태그 안에 있는 input값을 리셋
         type = "submit" : 서버에 전송하는 버튼으로, 회원가입, 로그인 버튼 등 
         위 셋은 button태그로 대체 가능
     -->
-
     <form action = "">
         <input type="text" value=""> <br>
         <input type="button" value="버튼"> <br>
@@ -30,16 +30,7 @@
     <!-- type = "password" : 비밀번호를 입력할 때 사용, 비밀번호는 *로 표시 -->
     <input type="password"> <br>
 
-    <!-- type = "checkbox" : 다중 선택을 이용할 때 사용, 같은 문제의 checkbox의 경우 name을 같게 한다. -->
-    <form action="">
-        좋아하는 과일은? (복수 선택 가능) <br>
-        <input type="checkbox" name="fruit" value="" id=""><label>사과</label>
-        <label>
-        <input type="checkbox" name="fruit" value="" id="">오렌지
-        </label>
-        <input type="submit" value="제출">
-        
-    </form>
+    
 
     <!-- type="color" 색을 선택할 때 사용, 색상 정보는 16진수로 표현 -->
     <form action="">
@@ -109,6 +100,16 @@
         <label for="">
             <input type="radio" name="radio" value="on"> on
         </label>
+    </form>
+
+    <!-- type = "checkbox" : 다중 선택을 이용할 때 사용, 같은 문제의 checkbox의 경우 name을 같게 한다. -->
+    <form action="">
+        좋아하는 과일은? (복수 선택 가능) <br>
+        <input type="checkbox" name="fruit" value="" id=""><label>사과</label>
+        <label>
+        <input type="checkbox" name="fruit" value="" id="">오렌지
+        </label>
+        <input type="submit" value="제출">
     </form>
 </body>
 </html>

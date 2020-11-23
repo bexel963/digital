@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>선택자 우선순위</title>
+    <!-- 
+        선택자 우선순위
+            - 아이디(1000점) > 클래스(100점) > 태그(10점)
+            - 우선 순위가 같은 경우 아래에 있는 내용에 적용된다.
+     -->
+    <style>
+        div{
+            color: red;
+        }
+        div>a{
+            color: green;
+        }
+        .naver{                         /* 클래스 선택자 우선순위가 태그 선택자 우선순위 보다 높음*/
+            color: blue;
+        }
+        #daum{                          /* 태그선택자 우선순위가 1등 */
+            color: yellow;
+        }
+        .naver2{
+            color: pink;
+        }
+    </style>
+</head>
+<body>
+    <div><a href="//naver.com">네이버1</a></div>
+    <div class="naver naver2">네이버2</div>             <!-- 다중 클래스 - naver, naver2 우선 순위가 같으면 아래에 있는 요소가 선택됨 -->
+    <div id="daum">다음</div>
+</body>
+</html>
