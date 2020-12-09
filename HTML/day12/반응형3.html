@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반응형3</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            border: 1px solid green;
+            width: 100%;
+            height: 100vh;
+            box-sizing: border-box;
+            float: left;
+        }
+        .box2{
+            border: 1px solid green;
+            width: 100%;
+            height: 100vh;
+            box-sizing: border-box;
+            float: left;
+        }
+        .menu1, .menu2, .menu3{
+            border: 1px solid black;
+            width: calc(100% / 3);
+            height: calc(100% / 10);
+            float: left;
+            text-align: center;
+            margin-left: -1px;
+            border-left: none;
+            line-height: 70px;
+        }
+        @media (max-width: 640px){
+            .box{
+                display: none;
+            }
+            .box2 .icon{
+                float: right;
+                height: calc(100% / 10);
+                width: calc(100% / 5);
+                border: 1px solid red;
+                background-image: url(https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F421%2F2014%2F12%2F08%2F1136195_article_99_20141208095702.jpg&type=sc960_832);
+                background-size: 100%;
+            }
+            .box2 .menu4{
+                float: left;
+                height: 10%;
+                width: 80%;
+                margin-left: -3px;
+                border: 1px solid black;
+                border-right: none;
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="menu1">메뉴1</div>
+        <div class="menu2">메뉴2</div>
+        <div class="menu3">메뉴3</div>
+    </div>
+    <div class="box2">
+        <div class="menu4"></div>
+        <div class="icon"></div>
+    </div>
+</body>
+</html>

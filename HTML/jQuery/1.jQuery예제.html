@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>예제</title>
+    <script src="//code.jquery.com/jquery-3.4.1.js"></script>
+</head>
+<body>
+    <button class="btn1">버튼1</button>
+    <button class="btn2">버튼2</button>
+    <script>
+        //javascript 이벤트 처리방식
+        window.onload = function(){
+            var btn1 = document.getElementsByClassName('btn1')[0];
+            //var btn1 = document.getElementsById('btn1'); -> id는 이렇게 불러옴
+            btn1.onclick = function(){
+                alert('버튼1 클릭');
+            }
+        }
+        //jquery 이벤트 처리방식
+        $(function(){
+            $('.btn2').click(function(){
+            //$('#btn2').click(function(){ -> id는 이렇게 불러옴
+                alert('버튼2 클릭');
+            })
+        })
+    </script>
+</body>
+</html>

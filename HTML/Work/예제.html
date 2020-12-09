@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            
+            width: 502px;
+            background-color: yellow;
+            border: 1px solid black;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .box::after{                       /* 2. 이걸로 높이를 생성 시켜준다. */
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .left{
+            width: 50%;
+            height: 480px;
+            float: left;                    /* 1. float를 쓰면 부모의 높이가 안 잡힌다. */
+            background-color: red;
+            
+        }
+        .right{
+            width: 50%;
+            height: 480px;
+            float: left;
+            background-color: blue;
+        
+        }
+        .box2{
+            height: 300px;
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="left"></div>
+        <div class="right"></div>  
+    </div>
+    <div class="box2"></div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="//code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+        /*
+            $(function(){}) 
+                - 문서 로딩(body태그에 있는 구성)이 완료되면 function(){}을 바로 실행
+            $(document).ready(function(){})
+                - 위에랑 같음
+        */
+        $(function(){
+            /*
+                - 객체 정보 가져오기
+                    $('선택자')
+                - 객체 이벤트 등록하기
+                    $('선택자').이벤트명(function(){
+                        구현;
+                    })
+            - click : 마우스로 요소를 클릭했을 때 동작
+            */
+            $('.btn1').click(function(){
+                console.log('버튼1 클릭');
+            })
+            $('.btn2').click(function(){
+                console.log('버튼2 클릭');
+            })
+        })
+        
+    </script>
+</head>
+<body>
+    <button class="btn1">버튼1</button>
+    <button class="btn2">버튼2</button>
+</body>
+</html>

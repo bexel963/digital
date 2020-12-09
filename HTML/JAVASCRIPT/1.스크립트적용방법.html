@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>적용방법</title>
+    <!--
+        - 스타일 적용방법
+        1. style 태그 이용
+        2. link 태그를 이용하여 외부 css파일을 연결하는 방법
+        3. 태그의 style 속성에 추가하는 방법
+        
+        - 스트립트 적용 방법
+        1. head태그 안에 script 태그를 이용
+            - 실행 순서가 head태그 다음에 body태그이기 때문에 잘못하면 기능이 동작하지 않을 수 있다.
+        2. body태그 안에 script 태그를 이용
+        3. script태그를 이용하여 외부 js 파일을 연결하는 방법
+    -->
+    <script src="//code.jquery.com/jquery-3.4.1.js"></script> <!-- (3번 방법) -->
+    
+    <!-- 버튼이 안 만들어진 상태에서 이벤트를 등록하기 대문에 클릭 이벤트 실행이 안됨 -->
+    <script>
+    $('button').click(function(){
+        alert('안녕하세요.');
+    })
+    </script>
+
+    <!-- 버튼이 만들어질때까지 대기했다가 실행되기 때문에 클릭 이벤트가 실행 됨 -->
+    <script>
+        $(document).ready(function(){       /* (1번 방법)body태그에 태그들이 준비가 되면 이벤트 실행. */
+            $('button').click(function(){
+                alert('안녕하세요.');
+            })
+        })
+    </script>
+</head>
+<body>
+    <button>클릭</button>           <!-- 버튼을 만들고 --> 
+    <!-- <script>
+        $('button').click(function(){   /* (2번 방법)버튼에 기능 추가 */
+            alert('안녕하세요.');
+        })
+    </script> -->
+</body>
+</html>
