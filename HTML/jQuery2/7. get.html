@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>get예제</title>
+    <script src="//code.jquery.com/jquery-3.4.1.js"></script>
+</head>
+<body>
+    <div class="box">
+        <span>안녕하세요.</span>
+    </div>
+    <input type="text" class="input" value="123"> <!-- input태그는 단일 태그-->
+    <br>
+    <input type="checkbox" id="check" checked>
+    
+    <script>
+        /*
+            - text() : 해당 요소 안에있는 문자열을 가져옴
+            - html() : 해당 요소 안에있는 html 코드를 가져옴
+            - val() : 해당 요소 안에있는 value값을 가져욤
+                - input태그나 textarea태그에서 사용 가능
+            - attr(속성명) : 해당 요소의 속성 정보를 가져옴
+                - 현재 요소의 속성 정보가 기입되지 않으면 undefined로 표시
+                - 동작으로 인해 값이 변해도 변한 값이 반영되지 않음
+            - prop(속성명) : 해당 요소의 속성 정보를 가져옴
+                - 현재 요소의 html코드에 속성 정보가 없어도 적용되는 속성이면 값이 표시됨
+                - 동작으로 인해 값이 변하면 변한 값을 가져옴
+            
+            - 
+        */
+        var text = $('.box').text();
+        var html = $('.box').html();
+        var val = $('.box').val();
+        console.log('text : ' + text);
+        console.log('html : ' + html);
+        console.log('val : ' + val);
+
+        text = $('.input').text();
+        html = $('.input').html();
+        val = $('.input').val();
+        console.log('.input : ' + text);
+        console.log('.input : ' + html);
+        console.log('.input : ' + val);
+
+        var attrClass = $('.input').attr('class');
+        var propClass = $('.input').prop('class');
+        console.log('attr[class] : ' + attrClass);
+        console.log('prop[class] : ' + propClass);
+
+        var attrClass = $('#check').attr('checked');
+        var propClass = $('#check').prop('checked');
+        console.log('attr[checked] : ' + attrClass);
+        console.log('prop[checked] : ' + propClass);
+
+    </script>
+</body>
+</html>

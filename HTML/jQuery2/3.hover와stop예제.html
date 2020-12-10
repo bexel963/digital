@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="//code.jquery.com/jquery-3.4.1.js"></script>
+    <style>
+        .btn{
+            width: 100%;
+            height: 50px;
+            display: block;
+            background-color: transparent;
+            border: 1px solid black;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .box{
+            border: 1px solid #000;
+            border-top: none;
+            background-color: yellow;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <button class="btn">slideToggle</button>
+    <div class="box"></div>
+    
+    <script>
+        /*
+            - 버튼과 박스를 생성
+            - 버튼에 마우스를 가져다대면 박스가 천천히 위로 접힘
+            - 버튼을 마우스에서 때면 박스가 천천히 아래로 내려감
+        */
+       $(function(){
+            $('.btn').hover(function(){
+                $('.box').stop() .slideToggle(1000);
+            });
+       });
+
+    //    $(function(){
+    //         $('.btn').hover(function(){
+    //             $('.box').slideUp(1000);
+    //         },function(){
+    //             $('.box').slideDown(1000);
+    //         })
+    //    });
+    // 2개 같은 코드
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>animate예제</title>
+    <script src="//code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="//cdn.jsdelivr.net/jquery.color-animation/1/mainfile"></script> <!-- animate에 배경색 변화시키는 기능을 넣으려면 '이' 플러그인 넣어 줘야함. -->
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <button class="move-btn">이동</button>
+    <div class="box"></div>
+    <script>
+        $(function(){
+            /*
+                - $('선택자').animate({param}, speed, callback)
+                    - param : 변경될 css 속성:값 / (필수)
+                        - param의 속성명 적는 방법
+                            1. '실제속성명' ( 속성명에 - 있으면 따옴표 써준다. )
+                            2. 변경된 속성명
+                            ex)
+                                1. 'margin-left'
+                                2. margiLeft
+                    - speed : 애니메이션 지속 시간 ( 변경이 완료될때까지 걸리는 시간. 단위(ms)) / (선택)
+                    - callback : 애니메이션 종료 후 실행될 함수 / (선택)
+                    - 추가 작업 없이 적용될 수 있는 animate 속성들
+                        - backgroundPositionX, backgroundPositionY, bottom, fonsSize, height, left,
+                          margin, opacity, padding, right, top, width
+            */
+            $('.move-btn').click(function(){
+                $('.box').animate({'margin-left':'500px','background-color':'#ff0000'},1000,function(){
+                    console.log('이동완료');
+                });
+            })
+        })
+    </script>
+</body>
+</html>

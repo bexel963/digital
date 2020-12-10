@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전화번호유효성예제</title>
+    <script src="//code.jquery.com/jquery-3.4.1.js"></script>
+</head>
+<body>
+     <input type="text" class="input" value="">
+     <button class="btn">아이디 확인</button>
+     <br>
+     <input type="password" name="pw" id="pw">
+     <input type="password" name="pw2" id="pw2">
+     <button class="check-btn">비밀번호 체크</button>
+    <script>
+        /*
+            - input태그에 아이디를 입력받아 올바른 아이디인지 체크하여,
+              올바르면 올바른 아이디, 아니면 아니라고 출력하세요.
+              - 아이디는 8~13자
+              - 아이디 첫글자는 영문자
+              - 아이디는 영문 대소문자와 숫자만 가능
+        */
+        /*
+            - 비밀번호와 비밀번호 확인을 입력하여 입력한 두 값이 같은지 다른지를 버튼을 클릭하면,
+              확인하도록 작성하세요.
+              js에서는 == 로 문자열 비교 가능하다.
+        */
+        var idReg = /^[a-zA-Z][a-zA-Z0-9]{7,12}$/;
+
+        $(function(){
+            $('.btn').click(function(){
+                var id = $('.input').val();
+                if(idReg.test(id)){
+                    console.log('사용 가능한 아이디');
+                }else{
+                    console.log('사용 불가능한 아이디');
+                }
+            })
+            $('.check-btn').click(function(){
+                var pw = $('#pw').val();
+                var c_pw = $('#pw2').val();
+                if( pw == c_pw ){
+                    console.log('비밀번호가 일치합니다.');
+                }else{
+                    console.log('비밀번호가 불일치합니다.');
+                }
+            })
+        })
+    </script>
+</body>
+</html>

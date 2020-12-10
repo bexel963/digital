@@ -28,12 +28,28 @@
             $('.btn2').click(function(){
                 console.log('버튼2 클릭');
             })
+            $('.box').click(function(){
+                console.log('버튼 클릭');
+            })
         })
-        
     </script>
+    <style>
+        .box{
+            width: 50px;
+            height: 50px;
+            display: inline-block;
+            background-color: yellow;
+            line-height: 50px;
+            font-size: 13px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <button class="btn1">버튼1</button>
     <button class="btn2">버튼2</button>
+    <div class="box">버튼</div>
 </body>
 </html>
