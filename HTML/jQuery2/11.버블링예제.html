@@ -22,6 +22,7 @@
         /*
             - 버블링 : 요소에 이벤트가 발생했을 때 해당 요소에만 발생하는게 아니라 해당 요소의 조상들도,
                        이벤트가 발생하는 현상
+            - stopPorpagation() : 버블링 효과를 막아주는 메소드
         */
         $('.box').click(function(){ console.log('box : click');});
         $('.box-inner').click(function(){ console.log('box-inner : click');});

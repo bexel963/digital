@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>클래스예제</title>
+    <script src="../js/jquery.js"></script>
+    <style>
+        .box{
+            background-image: url(https://i.pinimg.com/originals/05/1f/f3/051ff3fb781ff83c9b0f8a32f9922fa6.png);
+            background-size: 200px 200px;
+            width: 200px;
+            height: 200px;
+        }
+        .change{
+            background-image: url(https://blog.kakaocdn.net/dn/0mySg/btqCUccOGVk/nQ68nZiNKoIEGNJkooELF1/img.jpg);
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="box"></div>
+    <button class="btn">변경</button>
+    <script>
+        $('.btn').click(function(){
+            $('.box').toggleClass('change');
+        })
+        $('.box').hover(function(){
+            $(this).toggleClass('change'); /* 여기서 this는 마우스 가따 덴 곳 */
+        })
+        $('.box').hover(function(){          // 위에꺼랑 같은 코드
+            $(this).addClass('change'); 
+        }),function(){
+            $(this).removeClass('change'); 
+        }
+    </script>
+</body>
+</html>

@@ -27,7 +27,7 @@
             - 스크립트에서는 문자열은 '' 또는 "" 이다.
         */
         var num3 = 50 // 문제가 없는코드 , ; 생략 가능
-        var str1 = '<div class="box"></div>';    /* 이거 추천 */
+        var str1 = '<div class="box"></div>';    /* 문자열은 '' 추천 */
         var str2 = "<div class='box'></div>";
 
         /*
@@ -39,7 +39,7 @@
             - confirm(문자열) : 문자열을 확인하기 위한 창으로 확인과 취소 버튼이 있음
                 - 확인을 누르면 true를 취소를 누르면 false를 반환
         */
-        var data = prompt('제목','기본값');
+        var data = prompt('제목', '기본값');
         console.log(data);
         alert("회원가입이 완료 되었습니다.");
         var isok = confirm('가입 하시겠습니까?');
