@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트종류2</title>
+    <script src="../js/jquery.js"></script>
+    <style>
+        body{
+            height: 2000px;
+        }
+        div{
+            padding: 20px;
+        }
+        .box{ background-color: yellow;
+            position: relative;
+        }
+        .sub-box{ background-color: green;}
+        .box-in{
+            background-color: red;
+            height: 60px;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="box box1">1
+        mouse enter/leave
+        <div class="sub-box">
+            <div class="box-in">
+                <span class="text"></span>
+            </div>
+        </div>
+        <span class="text"></span>
+    </div>
+    <div class="box box2">2
+        mouse over/out
+        <div class="sub-box">
+            <div class="box-in">
+                <span class="text"></span>
+            </div>
+        </div>
+        <span class="text"></span>
+    </div>
+    <script>
+        /*
+            - mouseover : 요소에 마우스를 올렸을 때, 그 후 자식 요소에 마우스를 올리면 동작 
+            - mouseout : 요소에 마우스를 때면~
+            - mouseenter : 요소에 마우스를 올렸을 때, 그 후 자식 요소에 마우스를 올려도 동작하지 않음
+            - mouseleaver : 요소에 마우스를 때면~
+
+            - mousedown : 마우스를 누르면~
+            - mouseup : 마우스를 때면~
+        */
+        var i = 0;
+        var j = 0;
+        $(function(){
+            // .함수 .함수 연달아 나오는건 chain기법임
+            $('.box1').mouseenter(function(){
+                $(this).children('.text').text(++i);
+            }).mouseleave(function(){
+
+            })
+            $('.box2').mouseover(function(){
+                $(this).children('.text').text(++j);
+            }).mouseleave(function(){
+                
+            })
+            $('body').mousedown(function(){
+                console.log('mousedown');
+            })
+            $('body').mouseup(function(){
+                console.log('mouseup');
+            })
+            /*
+                - resize : 화면 크기를 변경하면~
+                - scroll : 스크롤 동작하면~
+            */
+            // g화면 크기 변경시 동작
+            var k = 0;
+            $(window).resize(function(){
+                console.log("화면 크기 변경 횟수 : " + ++k);
+            })
+            var cnt = 0;
+            $(window).scroll(function(){
+                console.log("스크롤 이동 횟수 : " + ++cnt);
+            })
+        })
+    </script>
+</body>
+</html>

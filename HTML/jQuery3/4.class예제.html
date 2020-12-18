@@ -22,13 +22,13 @@
     <div class="box"></div>
     <button class="btn">변경</button>
     <script>
-        $('.btn').click(function(){
+        $('.btn').click(function(){        
             $('.box').toggleClass('change');
         })
-        $('.box').hover(function(){
-            $(this).toggleClass('change'); /* 여기서 this는 마우스 가따 덴 곳 */
-        })
-        $('.box').hover(function(){          // 위에꺼랑 같은 코드
+        // $('.box').hover(function(){         // this는 이벤트가 발생한 요소
+        //     $(this).toggleClass('change');  // 여기서 this는 마우스 가따 덴 곳 
+        // })
+        $('.box').hover(function(){          
             $(this).addClass('change'); 
         }),function(){
             $(this).removeClass('change'); 

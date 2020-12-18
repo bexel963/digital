@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/jquery.js"></script>
+</head>
+<body>
+    <ul>
+        <li class="menu">메뉴1</li>
+        <li class="menu">메뉴2</li>
+        <li class="menu">메뉴3</li>
+        <li class="menu">메뉴4</li>
+        <li class="menu">메뉴5</li>
+    </ul>
+    <script>
+        $(function(){
+            var size = $('.menu').length;   // 해당 선택자에 맞는 요소의 개수 알려줌
+            for(var i=0 ; i<size ; i++){
+                var text = $('.menu').eq(i).text();
+                console.log(text);
+            }
+            // each를 사용하여 반복문을 편하게 사용할 수 있따.
+            $('.menu').each(function(i){
+                var text = $(this).text();
+                console.log(text);
+            })
+        })
+    </script>
+</body>
+</html>

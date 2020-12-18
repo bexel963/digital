@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/jquery.js"></script>
+    <style>
+        .box{
+            width: 700px;
+            height: 400px;
+            border: 2px solid black;
+            border-radius: 5px;;
+            /* overflow: hidden; */
+        }
+        .container{
+            width: 2100px;
+            height: 400px;
+        }
+        .img{
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="container">
+            <img width="700" height="400" src="https://blog.kakaocdn.net/dn/0mySg/btqCUccOGVk/nQ68nZiNKoIEGNJkooELF1/img.jpg" alt="" class="img">
+            <img width="700" height="400" src="https://t1.daumcdn.net/cfile/tistory/2207573D58CFDE2704" alt="" class="img">
+            <img width="700" height="400" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqjiwrKt1LyKk5coeIijL7uN6d-u3V2OwK0Wk1st-9Be5Urpz5Dzmp5kn278fzuwn23JctiHKqVzBBhp7vS0dTCjOC0v20xpr_8w&usqp=CAU&ec=45750088" alt="" class="img">
+        </div>
+    </div>
+    
+    <script>
+        $(function(){
+            setInterval(()=>{
+                if(!$('.box .img').is(':animated')){ // img클래스가 animate진행중이 아니면
+                    $('.box .img').first().animate({'margin-left':'-700px'},1900,function(){
+                        $(this).detach().appendTo('.container');
+                        $(this).removeAttr('style');   
+                    });
+                }
+            }, 2000);
+        })
+        /*
+            1. box클래스에 있는 img클래스가 animate 진행중이 아니면
+            2. box클래스에 있는 img클래스들 중 첫번째 img클래스에 margin-left:-700px 이라는 animate를 1900ms 동안 진행시키고,
+            3. 첫번째 img클래스를 떼어서 container클래스 맨 뒤에 붙이고, ( 이때 maring-left:-700px 가 적용되면서 2번째 img클래스에 겹쳐진다. )
+            4. 첫번째 img클래스의 style속성을 없앤다. ( maring-left:-700px 가 사라지면서 2번째 img클래스의 뒤로 간다. )
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/jquery.js"></script>
+    <style>
+        .time{
+            width: 140px;
+            height: 30px;
+            border: 1px solid black;
+            text-align: center;
+            padding-top: 8px;
+        }
+        .stop{
+            
+        }
+        .save{
+            
+        }
+        .save-box{
+            margin-top: 20px;
+            width: 140px;
+            border: 1px solid black;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="time"></div>
+    <button class="start">시작</button>
+    <button class="stop">중지</button>
+    <button class="save">저장</button>
+    <div class="save-box"></div>
+    
+    
+    
+    <script>
+        $(function(){
+            var hour=0, min=0, second=0;
+            var min2=0, second2=0;
+           
+            $('.start').click(function(){
+                var interval = setInterval(function(){
+                var time = hour+ ' : ' +min2+min+ ' : ' +second2+second;
+                    ++second;
+                    if( second == 10 ){
+                        ++second2;
+                        second = 0;
+                        if( second2 == 6 ){
+                            ++min;
+                            second2 = 0;
+                            if( min == 10 ){
+                                ++min2;
+                                min = 0;
+                                if( min2 == 6 ){
+                                    ++hour;
+                                    min2 = 0;
+                                }
+                            }
+                        }
+                     }
+                    $('.time').html(time);
+                },1000)
+                $('.save').click(function(){
+                    $('.save-box').append( hour+ ' : ' +min2+min+ ' : ' +second2+second+ '<br>');
+                    $('.save-box').show();
+                })
+                $('.stop').click(function(){
+                    clearInterval(interval);
+                })
+            })
+           
+        })
+    </script>
+  
+</body>
+</html>
