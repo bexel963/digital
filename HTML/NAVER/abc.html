@@ -128,7 +128,56 @@
 			$('.filt-search-box .close-btn').click(function(){
 				$('.filt-search-box').hide();
 			})
-			
+
+
+			//오늘 읽은만한 글 메뉴를 선택하면
+			$('.group-menu-list a').click(function(e){
+				e.preventDefault();
+				$('.group-menu-list a').removeClass('select');
+				$(this).addClass('select');
+				viewGroupMenuBtn();
+				$('.theme-cont-box div').hide();
+				var target = $(this).attr('data-target');
+				$(target).show();
+			});
+
+			$('.group-menu .next').click(function(e){
+				e.preventDefault();
+				//현재 선택된 메뉴가 메뉴리스트 마지막 메뉴면
+				if($('.group-menu .select').parents('ul').find('li')
+					.last().children().hasClass('select')){
+						menuNum++;
+						var ml = -751 * menuNum;
+						$('.group-menu-list a').removeClass('select');
+						$('.group-menu-list').eq(menuNum).children().
+							first().children().addClass('select');
+						$('.group-menu-wrap').first().animate({'margin-left':ml+'px'},500)
+				}else{
+					$('.group-menu .select').parent().next().find('a')
+						.addClass('select');
+					$('.group-menu .select').first().removeClass('select');
+				}
+				viewGroupMenuBtn();
+			})
+
+			$('.group-menu .prev').click(function(e){
+				e.preventDefault();
+				if($('.group-menu .select').parents('ul').find('li')
+					.first().children().hasClass('select')){
+						menuNum--;
+						var ml = -751 * menuNum;
+						$('.group-menu-list a').removeClass('select');
+						$('.group-menu-list').eq(menuNum).children().
+							last().children().addClass('select');
+						$('.group-menu-wrap').first().animate({'margin-left':ml+'px'},500)
+
+				}else{
+					$('.group-menu .select').parent().prev().find('a')
+						.addClass('select');
+					$('.group-menu .select').last().removeClass('select');
+				}
+				viewGroupMenuBtn();
+			})
 		});
 		//메뉴설정에서 메뉴들을 선택하고 저장했을 때 최종 결정된 메뉴
 		var selectedMenuArr = [];
@@ -145,6 +194,9 @@
 			'책'   : '#4',
 			'웹툰' : '#5'
 		};
+		
+		var menuNum = 0 ;
+		
 		function setMenuCheckbox(arr){
 			$('.service-data input').each(function(){
 				var text = $(this).parent().text().trim();
@@ -188,6 +240,7 @@
 				}
 			})
 		}
+
 		function getPage(page,min,max){
 			if(page < min)	return max;
 			if(page > max)	return min;
@@ -199,8 +252,19 @@
 			$('.empty-box').hide();
 			$('.black-menu-box').show();
 		}
-		
-		
+
+		function viewGroupMenuBtn(){
+			if($('.group-menu-list:first li:first>a').hasClass('select')){
+				$('.group-menu .prev').hide();
+			}else{
+				$('.group-menu .prev').show();
+			}
+			if($('.group-menu-list:last li:last>a').hasClass('select')){
+				$('.group-menu .next').hide();
+			}else{
+				$('.group-menu .next').show();
+			}
+		}
 	</script>
 </head>
 <body>
@@ -590,11 +654,11 @@
 					<div class="left-box">
 						<a href="#" class="link-news">연합뉴스</a>
 						<div class="rolling-news">
-							<a href="#" class="news">카드사용 늘리면 100만원 소득공제추가..."내년 3.2% 성장"</a>
-							<a href="#" class="news">4인가족 월 1080원 싸지지만…유가 뛰면 전기료 바로 뛴다</a>
-							<a href="#" class="news">'20년 억울한 옥살이' 윤성여씨 사건 발생 32년만에 재심서 무죄(종합)</a>
-							<a href="#" class="news">[날씨]오늘 중부지방 밤부터 ‘눈’…전국 곳곳 눈·비 소식</a>
-							<a href="#" class="news">화장품기업 DHC 회장 또 혐한 발언…日언론 ‘혐오선동’ 이례적 비판 [이동준의 일본은 지금]</a>
+							<a href="#" class="news">카드사용 늘리면 100만원 소득공제 추가…"내년 3.2% 성장"</a>
+							<a href="#" class="news">화이자 백신, 미국서도 알레르기 반응…한 병원서 2명째</a>
+							<a href="#" class="news">美FDA 자문위, 모더나백신 사용권고…두번째 백신접종 '초읽기'</a>
+							<a href="#" class="news">[팩트체크] 검찰총장 징계 집행, 대통령 재량은 없다?</a>
+							<a href="#" class="news">경찰, 박원순 휴대폰 포렌식 재개…사망 경위 규명 주력</a>
 						</div>
 					</div>
 					<div class="right-box">
@@ -798,461 +862,462 @@
 								</a>
 							</div>
 						</div>
-						<div class="rolling-group">
-							<div class="group-menu">
-								<i class="prev-btn"></i>
-								<ul class="group-1">
-									<li>
-										<a href="#" class="enter">엔터</a>
-									</li>
-									<li>
-										<a href="#" class="sports select">스포츠</a>
-									</li>
-									<li>
-										<a href="#" class="car">자동차</a>
-									</li>
-									<li>
-										<a href="#" class="webtoon">웹툰</a>
-									</li>
-									<li>
-										<a href="#" class="finance">경제M</a>
-									</li>
-									<li>
-										<a href="#" class="food">푸드</a>
-									</li>
-									<li>
-										<a href="#" class="game">게임</a>
-									</li>
-									<li>
-										<a href="#" class="movie">영화</a>
-									</li>
-								</ul>
-								<i class="next-btn"></i>
-								<ul class="group-2">
+						<div class="group-menu">
+							<a href="#" class="prev"></a>
+							<a href="#" class="next"></a>
+							<div class="group-menu-view">
+								<div class="group-menu-wrap after">
+									<ul class="after group-menu-list focus">
 										<li>
-											<a href="#" class="enter">JOB&</a>
+											<a href="#" class="enter" data-target=".cont-enter">엔터</a>
 										</li>
 										<li>
-											<a href="#" class="sports select">테크</a>
+											<a href="#" class="sports select" data-target=".cont-sports">스포츠</a>
 										</li>
 										<li>
-											<a href="#" class="car">여행+</a>
+											<a href="#" class="car" data-target=".cont-car">자동차</a>
 										</li>
 										<li>
-											<a href="#" class="webtoon">과학</a>
+											<a href="#" class="webtoon" data-target=".cont-webtoon">웹툰</a>
 										</li>
 										<li>
-											<a href="#" class="finance">리빙</a>
+											<a href="#" class="finance" data-target=".cont-finance">경제M</a>
 										</li>
 										<li>
-											<a href="#" class="food">건강</a>
+											<a href="#" class="food" data-target=".cont-food">푸드</a>
 										</li>
 										<li>
-											<a href="#" class="game">비즈니스</a>
+											<a href="#" class="game" data-target=".cont-game">게임</a>
 										</li>
 										<li>
-											<a href="#" class="movie">연애·결혼</a>
+											<a href="#" class="movie" data-target=".cont-movie">영화</a>
 										</li>
-								</ul>
-								<ul class="group-3">
+									</ul>
+									<ul class="after group-menu-list focus">
 										<li>
-											<a href="#" class="enter">책문화</a>
-										</li>
-										<li>
-											<a href="#" class="sports select">부모i</a>
+											<a href="#" class="job">JOB&</a>
 										</li>
 										<li>
-											<a href="#" class="car">법률</a>
+											<a href="#" class="tech">테크</a>
 										</li>
 										<li>
-											<a href="#" class="webtoon">패션뷰티</a>
+											<a href="#" class="traval">여행+</a>
 										</li>
 										<li>
-											<a href="#" class="finance">동물공감</a>
+											<a href="#" class="sci">과학</a>
 										</li>
 										<li>
-											<a href="#" class="food">디자인</a>
+											<a href="#" class="living">리빙</a>
 										</li>
 										<li>
-											<a href="#" class="game">중국</a>
+											<a href="#" class="health">건강</a>
 										</li>
 										<li>
-											<a href="#" class="movie">FARM</a>
-										</li>
-								</ul>
-								<ul class="group-4">
-										<li>
-											<a href="#" class="enter">공연전시</a>
+											<a href="#" class="business">비즈니스</a>
 										</li>
 										<li>
-											<a href="#" class="sports select">함께N</a>
+											<a href="#" class="marry">연애·결혼</a>
+										</li>
+									</ul>
+									<ul class="after group-menu-list focus">
+										<li>
+											<a href="#" class="job">책문화</a>
 										</li>
 										<li>
-											<a href="#" class="car">스쿨잼</a>
+											<a href="#" class="tech">테크</a>
 										</li>
-								</ul>
+										<li>
+											<a href="#" class="traval">여행+</a>
+										</li>
+										<li>
+											<a href="#" class="sci">과학</a>
+										</li>
+										<li>
+											<a href="#" class="living">리빙</a>
+										</li>
+										<li>
+											<a href="#" class="health">건강</a>
+										</li>
+										<li>
+											<a href="#" class="business">비즈니스</a>
+										</li>
+										<li>
+											<a href="#" class="marry">연애·결혼</a>
+										</li>
+									</ul>
+								</div>
 							</div>
-						</div>	
+						</div>
 					</div>
 					<div class="theme-cont"></div>
 				</div>
 				<div class="theme-cont-box">
-					<div class="top-box after">
-						<div class="left-box">
-							<a href="#" class="thumb-box">
-								<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_62%2FFKEvC_1607300188908i2Qa6_JPEG%2F1607300053886.jpg%22&type=nf728_360" alt="" class="thumbnail" width="364" height="180">
-								<i class="play-ico"></i>
-								<span class="runtime-box">
-									<span class="runtime-bg"></span>
-									<em class="runtime">10:20</em>
-								</span>
-							</a>
-							<a href="#" class="info-box">
-								<div class="category">핫클립</div>
-								<div class="title">창단 첫 가을야구, 어떤 점이 좋았을까?…로하스 잔류 여부 중요</div>
-								<div class="source">구독허구연</div>
-							</a>
+					<div class="cont-sports">
+						<div class="top-box after">
+							<div class="left-box">
+								<a href="#" class="thumb-box">
+									<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_62%2FFKEvC_1607300188908i2Qa6_JPEG%2F1607300053886.jpg%22&type=nf728_360" alt="" class="thumbnail" width="364" height="180">
+									<i class="play-ico"></i>
+									<span class="runtime-box">
+										<span class="runtime-bg"></span>
+										<em class="runtime">10:20</em>
+									</span>
+								</a>
+								<a href="#" class="info-box">
+									<div class="category">핫클립</div>
+									<div class="title">창단 첫 가을야구, 어떤 점이 좋았을까?…로하스 잔류 여부 중요</div>
+									<div class="source">구독허구연</div>
+								</a>
+							</div>
+							<div class="right-box">
+								<a href="#" class="thumb-box">
+									<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fsports-phinf.pstatic.net%2F20201207_91%2F1607270872138Gs2j4_JPEG%2F13.jpg%22&type=nf728_360" alt="" class="thumbnail" width="364" height="180">
+									<i class="play-ico"></i>
+									<span class="runtime-box">
+										<span class="runtime-bg"></span>
+										<em class="runtime">09:07</em>
+									</span>
+								</a>
+								<a href="#" class="info-box">
+									<div class="category">하이라이트</div>
+									<div class="title">울산 현대-멜버른 빅토리 하이라이트</div>
+									<div class="source">AFC 챔피언스리그 네이버스포츠</div>
+								</a>
+							</div>
 						</div>
-						<div class="right-box">
-							<a href="#" class="thumb-box">
-								<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fsports-phinf.pstatic.net%2F20201207_91%2F1607270872138Gs2j4_JPEG%2F13.jpg%22&type=nf728_360" alt="" class="thumbnail" width="364" height="180">
-								<i class="play-ico"></i>
-								<span class="runtime-box">
-									<span class="runtime-bg"></span>
-									<em class="runtime">09:07</em>
-								</span>
-							</a>
-							<a href="#" class="info-box">
-								<div class="category">하이라이트</div>
-								<div class="title">울산 현대-멜버른 빅토리 하이라이트</div>
-								<div class="source">AFC 챔피언스리그 네이버스포츠</div>
-							</a>
+						<div class="middle-box after">
+							<a href="#" class="sports-link">스포츠 홈</a>
+							<ul class="category-link">
+								<li ><a href="#">야구</a></li>
+								<li ><a href="#">해외야구</a></li>
+								<li ><a href="#">축구</a></li>
+								<li ><a href="#">해외축구</a></li>
+								<li ><a href="#">농구</a></li>
+								<li ><a href="#">배구</a></li>
+								<li ><a href="#">골프</a></li>
+								<li ><a href="#">일반</a></li>
+								<li ><a href="#">e스포츠&게임</a></li>
+							</ul>
+						</div>
+						<div class="bottom-box box1">
+							<div class="row-box after">
+								<div class="box">
+									<a href="#" class="thumb-box">
+										<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
+										<i class="play-ico"></i>
+										<span class="runtime-box">
+											<span class="runtime-bg"></span>
+											<em class="runtime">03:35</em>
+										</span>
+									</a>
+									<a href="#" class="info-box">
+										<div class="category">하이라이트</div>
+										<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
+										<div class="source">WKBL(한국여자농구연맹)</div>
+										<div class="source-right">2시간 전</div>
+									</a>
+								</div>
+								<div class="box">
+									<a href="#" class="thumb-box">
+										<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
+										<i class="play-ico"></i>
+										<span class="runtime-box">
+											<span class="runtime-bg"></span>
+											<em class="runtime">03:35</em>
+										</span>
+									</a>
+									<a href="#" class="info-box">
+										<div class="category">하이라이트</div>
+										<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
+										<div class="source">WKBL(한국여자농구연맹)</div>
+										<div class="source-right">2시간 전</div>
+									</a>
+								</div>
+								<div class="box">
+									<a href="#" class="thumb-box">
+										<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fsports-phinf.pstatic.net%2F20201207_91%2F1607270872138Gs2j4_JPEG%2F13.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
+										<i class="play-ico"></i>
+										<span class="runtime-box">
+											<span class="runtime-bg"></span>
+											<em class="runtime">09:07</em>
+										</span>
+									</a>
+									<a href="#" class="info-box">
+										<div class="category">하이라이트</div>
+										<div class="title">울산 현대-멜버른 빅토리 하이라이트</div>
+										<div class="source">AFC 챔피언스리그</div>
+										<div class="source-right">10시간 전</div>
+									</a>
+								</div>
+							</div>
+							<div class="row-box after">
+								<div class="box">
+									<a href="#" class="thumb-box">
+										<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
+										<i class="play-ico"></i>
+										<span class="runtime-box">
+											<span class="runtime-bg"></span>
+											<em class="runtime">03:35</em>
+										</span>
+									</a>
+									<a href="#" class="info-box">
+										<div class="category">하이라이트</div>
+										<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
+										<div class="source">WKBL(한국여자농구연맹)</div>
+										<div class="source-right">2시간 전</div>
+									</a>
+								</div>
+								<div class="box">
+									<a href="#" class="thumb-box">
+										<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
+										<i class="play-ico"></i>
+										<span class="runtime-box">
+											<span class="runtime-bg"></span>
+											<em class="runtime">03:35</em>
+										</span>
+									</a>
+									<a href="#" class="info-box">
+										<div class="category">하이라이트</div>
+										<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
+										<div class="source">WKBL(한국여자농구연맹)</div>
+										<div class="source-right">2시간 전</div>
+									</a>
+								</div>
+								<div class="box">
+									<a href="#" class="thumb-box">
+										<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fsports-phinf.pstatic.net%2F20201207_91%2F1607270872138Gs2j4_JPEG%2F13.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
+										<i class="play-ico"></i>
+										<span class="runtime-box">
+											<span class="runtime-bg"></span>
+											<em class="runtime">09:07</em>
+										</span>
+									</a>
+									<a href="#" class="info-box">
+										<div class="category">하이라이트</div>
+										<div class="title">울산 현대-멜버른 빅토리 하이라이트</div>
+										<div class="source">AFC 챔피언스리그</div>
+										<div class="source-right">10시간 전</div>
+									</a>
+								</div>
+							</div>
+							<div class="row-box after">
+								<div class="box">
+									<a href="#" class="thumb-box">
+										<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
+										<i class="play-ico"></i>
+										<span class="runtime-box">
+											<span class="runtime-bg"></span>
+											<em class="runtime">03:35</em>
+										</span>
+									</a>
+									<a href="#" class="info-box">
+										<div class="category">하이라이트</div>
+										<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
+										<div class="source">WKBL(한국여자농구연맹)</div>
+										<div class="source-right">2시간 전</div>
+									</a>
+								</div>
+								<div class="box">
+									<a href="#" class="thumb-box">
+										<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
+										<i class="play-ico"></i>
+										<span class="runtime-box">
+											<span class="runtime-bg"></span>
+											<em class="runtime">03:35</em>
+										</span>
+									</a>
+									<a href="#" class="info-box">
+										<div class="category">하이라이트</div>
+										<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
+										<div class="source">WKBL(한국여자농구연맹)</div>
+										<div class="source-right">2시간 전</div>
+									</a>
+								</div>
+								<div class="box">
+									<a href="#" class="thumb-box">
+										<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fsports-phinf.pstatic.net%2F20201207_91%2F1607270872138Gs2j4_JPEG%2F13.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
+										<i class="play-ico"></i>
+										<span class="runtime-box">
+											<span class="runtime-bg"></span>
+											<em class="runtime">09:07</em>
+										</span>
+									</a>
+									<a href="#" class="info-box">
+										<div class="category">하이라이트</div>
+										<div class="title">울산 현대-멜버른 빅토리 하이라이트</div>
+										<div class="source">AFC 챔피언스리그</div>
+										<div class="source-right">10시간 전</div>
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="bottom-box box2">
+							<div class="row-box after">
+								<div class="box">
+									<a href="#" class="thumb-box">
+										<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
+										<i class="play-ico"></i>
+										<span class="runtime-box">
+											<span class="runtime-bg"></span>
+											<em class="runtime">03:35</em>
+										</span>
+									</a>
+									<a href="#" class="info-box">
+										<div class="category">하이라이트</div>
+										<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
+										<div class="source">WKBL(한국여자농구연맹)</div>
+										<div class="source-right">2시간 전</div>
+									</a>
+								</div>
+								<div class="box">
+									<a href="#" class="thumb-box">
+										<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
+										<i class="play-ico"></i>
+										<span class="runtime-box">
+											<span class="runtime-bg"></span>
+											<em class="runtime">03:35</em>
+										</span>
+									</a>
+									<a href="#" class="info-box">
+										<div class="category">하이라이트</div>
+										<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
+										<div class="source">WKBL(한국여자농구연맹)</div>
+										<div class="source-right">2시간 전</div>
+									</a>
+								</div>
+								<div class="box">
+									<a href="#" class="thumb-box">
+										<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fsports-phinf.pstatic.net%2F20201207_91%2F1607270872138Gs2j4_JPEG%2F13.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
+										<i class="play-ico"></i>
+										<span class="runtime-box">
+											<span class="runtime-bg"></span>
+											<em class="runtime">09:07</em>
+										</span>
+									</a>
+									<a href="#" class="info-box">
+										<div class="category">하이라이트</div>
+										<div class="title">울산 현대-멜버른 빅토리 하이라이트</div>
+										<div class="source">AFC 챔피언스리그</div>
+										<div class="source-right">10시간 전</div>
+									</a>
+								</div>
+							</div>
+							<div class="row-box after">
+								<div class="box">
+									<a href="#" class="thumb-box">
+										<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
+										<i class="play-ico"></i>
+										<span class="runtime-box">
+											<span class="runtime-bg"></span>
+											<em class="runtime">03:35</em>
+										</span>
+									</a>
+									<a href="#" class="info-box">
+										<div class="category">하이라이트</div>
+										<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
+										<div class="source">WKBL(한국여자농구연맹)</div>
+										<div class="source-right">2시간 전</div>
+									</a>
+								</div>
+								<div class="box">
+									<a href="#" class="thumb-box">
+										<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
+										<i class="play-ico"></i>
+										<span class="runtime-box">
+											<span class="runtime-bg"></span>
+											<em class="runtime">03:35</em>
+										</span>
+									</a>
+									<a href="#" class="info-box">
+										<div class="category">하이라이트</div>
+										<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
+										<div class="source">WKBL(한국여자농구연맹)</div>
+										<div class="source-right">2시간 전</div>
+									</a>
+								</div>
+								<div class="box">
+									<a href="#" class="thumb-box">
+										<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fsports-phinf.pstatic.net%2F20201207_91%2F1607270872138Gs2j4_JPEG%2F13.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
+										<i class="play-ico"></i>
+										<span class="runtime-box">
+											<span class="runtime-bg"></span>
+											<em class="runtime">09:07</em>
+										</span>
+									</a>
+									<a href="#" class="info-box">
+										<div class="category">하이라이트</div>
+										<div class="title">울산 현대-멜버른 빅토리 하이라이트</div>
+										<div class="source">AFC 챔피언스리그</div>
+										<div class="source-right">10시간 전</div>
+									</a>
+								</div>
+							</div>
+							<div class="row-box after">
+								<div class="box">
+									<a href="#" class="thumb-box">
+										<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
+										<i class="play-ico"></i>
+										<span class="runtime-box">
+											<span class="runtime-bg"></span>
+											<em class="runtime">03:35</em>
+										</span>
+									</a>
+									<a href="#" class="info-box">
+										<div class="category">하이라이트</div>
+										<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
+										<div class="source">WKBL(한국여자농구연맹)</div>
+										<div class="source-right">2시간 전</div>
+									</a>
+								</div>
+								<div class="box">
+									<a href="#" class="thumb-box">
+										<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
+										<i class="play-ico"></i>
+										<span class="runtime-box">
+											<span class="runtime-bg"></span>
+											<em class="runtime">03:35</em>
+										</span>
+									</a>
+									<a href="#" class="info-box">
+										<div class="category">하이라이트</div>
+										<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
+										<div class="source">WKBL(한국여자농구연맹)</div>
+										<div class="source-right">2시간 전</div>
+									</a>
+								</div>
+								<div class="box">
+									<a href="#" class="thumb-box">
+										<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fsports-phinf.pstatic.net%2F20201207_91%2F1607270872138Gs2j4_JPEG%2F13.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
+										<i class="play-ico"></i>
+										<span class="runtime-box">
+											<span class="runtime-bg"></span>
+											<em class="runtime">09:07</em>
+										</span>
+									</a>
+									<a href="#" class="info-box">
+										<div class="category">하이라이트</div>
+										<div class="title">울산 현대-멜버른 빅토리 하이라이트</div>
+										<div class="source">AFC 챔피언스리그</div>
+										<div class="source-right">10시간 전</div>
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="more-box">
+							<button>
+								<i class="more-ico"></i>새로운글 더보기
+							</button>
 						</div>
 					</div>
-					<div class="middle-box after">
-						<a href="#" class="sports-link">스포츠 홈</a>
-						<ul class="category-link">
-							<li ><a href="#">야구</a></li>
-							<li ><a href="#">해외야구</a></li>
-							<li ><a href="#">축구</a></li>
-							<li ><a href="#">해외축구</a></li>
-							<li ><a href="#">농구</a></li>
-							<li ><a href="#">배구</a></li>
-							<li ><a href="#">골프</a></li>
-							<li ><a href="#">일반</a></li>
-							<li ><a href="#">e스포츠&게임</a></li>
-						</ul>
-					</div>
-					<div class="bottom-box box1">
-						<div class="row-box after">
-							<div class="box">
-								<a href="#" class="thumb-box">
-									<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
-									<i class="play-ico"></i>
-									<span class="runtime-box">
-										<span class="runtime-bg"></span>
-										<em class="runtime">03:35</em>
-									</span>
-								</a>
-								<a href="#" class="info-box">
-									<div class="category">하이라이트</div>
-									<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
-									<div class="source">WKBL(한국여자농구연맹)</div>
-									<div class="source-right">2시간 전</div>
-								</a>
-							</div>
-							<div class="box">
-								<a href="#" class="thumb-box">
-									<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
-									<i class="play-ico"></i>
-									<span class="runtime-box">
-										<span class="runtime-bg"></span>
-										<em class="runtime">03:35</em>
-									</span>
-								</a>
-								<a href="#" class="info-box">
-									<div class="category">하이라이트</div>
-									<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
-									<div class="source">WKBL(한국여자농구연맹)</div>
-									<div class="source-right">2시간 전</div>
-								</a>
-							</div>
-							<div class="box">
-								<a href="#" class="thumb-box">
-									<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fsports-phinf.pstatic.net%2F20201207_91%2F1607270872138Gs2j4_JPEG%2F13.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
-									<i class="play-ico"></i>
-									<span class="runtime-box">
-										<span class="runtime-bg"></span>
-										<em class="runtime">09:07</em>
-									</span>
-								</a>
-								<a href="#" class="info-box">
-									<div class="category">하이라이트</div>
-									<div class="title">울산 현대-멜버른 빅토리 하이라이트</div>
-									<div class="source">AFC 챔피언스리그</div>
-									<div class="source-right">10시간 전</div>
-								</a>
-							</div>
-						</div>
-						<div class="row-box after">
-							<div class="box">
-								<a href="#" class="thumb-box">
-									<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
-									<i class="play-ico"></i>
-									<span class="runtime-box">
-										<span class="runtime-bg"></span>
-										<em class="runtime">03:35</em>
-									</span>
-								</a>
-								<a href="#" class="info-box">
-									<div class="category">하이라이트</div>
-									<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
-									<div class="source">WKBL(한국여자농구연맹)</div>
-									<div class="source-right">2시간 전</div>
-								</a>
-							</div>
-							<div class="box">
-								<a href="#" class="thumb-box">
-									<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
-									<i class="play-ico"></i>
-									<span class="runtime-box">
-										<span class="runtime-bg"></span>
-										<em class="runtime">03:35</em>
-									</span>
-								</a>
-								<a href="#" class="info-box">
-									<div class="category">하이라이트</div>
-									<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
-									<div class="source">WKBL(한국여자농구연맹)</div>
-									<div class="source-right">2시간 전</div>
-								</a>
-							</div>
-							<div class="box">
-								<a href="#" class="thumb-box">
-									<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fsports-phinf.pstatic.net%2F20201207_91%2F1607270872138Gs2j4_JPEG%2F13.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
-									<i class="play-ico"></i>
-									<span class="runtime-box">
-										<span class="runtime-bg"></span>
-										<em class="runtime">09:07</em>
-									</span>
-								</a>
-								<a href="#" class="info-box">
-									<div class="category">하이라이트</div>
-									<div class="title">울산 현대-멜버른 빅토리 하이라이트</div>
-									<div class="source">AFC 챔피언스리그</div>
-									<div class="source-right">10시간 전</div>
-								</a>
-							</div>
-						</div>
-						<div class="row-box after">
-							<div class="box">
-								<a href="#" class="thumb-box">
-									<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
-									<i class="play-ico"></i>
-									<span class="runtime-box">
-										<span class="runtime-bg"></span>
-										<em class="runtime">03:35</em>
-									</span>
-								</a>
-								<a href="#" class="info-box">
-									<div class="category">하이라이트</div>
-									<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
-									<div class="source">WKBL(한국여자농구연맹)</div>
-									<div class="source-right">2시간 전</div>
-								</a>
-							</div>
-							<div class="box">
-								<a href="#" class="thumb-box">
-									<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
-									<i class="play-ico"></i>
-									<span class="runtime-box">
-										<span class="runtime-bg"></span>
-										<em class="runtime">03:35</em>
-									</span>
-								</a>
-								<a href="#" class="info-box">
-									<div class="category">하이라이트</div>
-									<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
-									<div class="source">WKBL(한국여자농구연맹)</div>
-									<div class="source-right">2시간 전</div>
-								</a>
-							</div>
-							<div class="box">
-								<a href="#" class="thumb-box">
-									<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fsports-phinf.pstatic.net%2F20201207_91%2F1607270872138Gs2j4_JPEG%2F13.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
-									<i class="play-ico"></i>
-									<span class="runtime-box">
-										<span class="runtime-bg"></span>
-										<em class="runtime">09:07</em>
-									</span>
-								</a>
-								<a href="#" class="info-box">
-									<div class="category">하이라이트</div>
-									<div class="title">울산 현대-멜버른 빅토리 하이라이트</div>
-									<div class="source">AFC 챔피언스리그</div>
-									<div class="source-right">10시간 전</div>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="bottom-box box2">
-						<div class="row-box after">
-							<div class="box">
-								<a href="#" class="thumb-box">
-									<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
-									<i class="play-ico"></i>
-									<span class="runtime-box">
-										<span class="runtime-bg"></span>
-										<em class="runtime">03:35</em>
-									</span>
-								</a>
-								<a href="#" class="info-box">
-									<div class="category">하이라이트</div>
-									<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
-									<div class="source">WKBL(한국여자농구연맹)</div>
-									<div class="source-right">2시간 전</div>
-								</a>
-							</div>
-							<div class="box">
-								<a href="#" class="thumb-box">
-									<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
-									<i class="play-ico"></i>
-									<span class="runtime-box">
-										<span class="runtime-bg"></span>
-										<em class="runtime">03:35</em>
-									</span>
-								</a>
-								<a href="#" class="info-box">
-									<div class="category">하이라이트</div>
-									<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
-									<div class="source">WKBL(한국여자농구연맹)</div>
-									<div class="source-right">2시간 전</div>
-								</a>
-							</div>
-							<div class="box">
-								<a href="#" class="thumb-box">
-									<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fsports-phinf.pstatic.net%2F20201207_91%2F1607270872138Gs2j4_JPEG%2F13.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
-									<i class="play-ico"></i>
-									<span class="runtime-box">
-										<span class="runtime-bg"></span>
-										<em class="runtime">09:07</em>
-									</span>
-								</a>
-								<a href="#" class="info-box">
-									<div class="category">하이라이트</div>
-									<div class="title">울산 현대-멜버른 빅토리 하이라이트</div>
-									<div class="source">AFC 챔피언스리그</div>
-									<div class="source-right">10시간 전</div>
-								</a>
-							</div>
-						</div>
-						<div class="row-box after">
-							<div class="box">
-								<a href="#" class="thumb-box">
-									<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
-									<i class="play-ico"></i>
-									<span class="runtime-box">
-										<span class="runtime-bg"></span>
-										<em class="runtime">03:35</em>
-									</span>
-								</a>
-								<a href="#" class="info-box">
-									<div class="category">하이라이트</div>
-									<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
-									<div class="source">WKBL(한국여자농구연맹)</div>
-									<div class="source-right">2시간 전</div>
-								</a>
-							</div>
-							<div class="box">
-								<a href="#" class="thumb-box">
-									<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
-									<i class="play-ico"></i>
-									<span class="runtime-box">
-										<span class="runtime-bg"></span>
-										<em class="runtime">03:35</em>
-									</span>
-								</a>
-								<a href="#" class="info-box">
-									<div class="category">하이라이트</div>
-									<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
-									<div class="source">WKBL(한국여자농구연맹)</div>
-									<div class="source-right">2시간 전</div>
-								</a>
-							</div>
-							<div class="box">
-								<a href="#" class="thumb-box">
-									<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fsports-phinf.pstatic.net%2F20201207_91%2F1607270872138Gs2j4_JPEG%2F13.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
-									<i class="play-ico"></i>
-									<span class="runtime-box">
-										<span class="runtime-bg"></span>
-										<em class="runtime">09:07</em>
-									</span>
-								</a>
-								<a href="#" class="info-box">
-									<div class="category">하이라이트</div>
-									<div class="title">울산 현대-멜버른 빅토리 하이라이트</div>
-									<div class="source">AFC 챔피언스리그</div>
-									<div class="source-right">10시간 전</div>
-								</a>
-							</div>
-						</div>
-						<div class="row-box after">
-							<div class="box">
-								<a href="#" class="thumb-box">
-									<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
-									<i class="play-ico"></i>
-									<span class="runtime-box">
-										<span class="runtime-bg"></span>
-										<em class="runtime">03:35</em>
-									</span>
-								</a>
-								<a href="#" class="info-box">
-									<div class="category">하이라이트</div>
-									<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
-									<div class="source">WKBL(한국여자농구연맹)</div>
-									<div class="source-right">2시간 전</div>
-								</a>
-							</div>
-							<div class="box">
-								<a href="#" class="thumb-box">
-									<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fphinf.pstatic.net%2Ftvcast%2F20201207_244%2FdgWXZ_1607300284857K6djq_JPEG%2F1607300202262.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
-									<i class="play-ico"></i>
-									<span class="runtime-box">
-										<span class="runtime-bg"></span>
-										<em class="runtime">03:35</em>
-									</span>
-								</a>
-								<a href="#" class="info-box">
-									<div class="category">하이라이트</div>
-									<div class="title">여자농구에는 벤치를 지휘하는 마에스트로가 있다? ｜벤치에서 생긴일 : KB스타즈 편</div>
-									<div class="source">WKBL(한국여자농구연맹)</div>
-									<div class="source-right">2시간 전</div>
-								</a>
-							</div>
-							<div class="box">
-								<a href="#" class="thumb-box">
-									<img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fsports-phinf.pstatic.net%2F20201207_91%2F1607270872138Gs2j4_JPEG%2F13.jpg%22&type=nf464_260" alt="" class="thumbnail" width="232" height="130">
-									<i class="play-ico"></i>
-									<span class="runtime-box">
-										<span class="runtime-bg"></span>
-										<em class="runtime">09:07</em>
-									</span>
-								</a>
-								<a href="#" class="info-box">
-									<div class="category">하이라이트</div>
-									<div class="title">울산 현대-멜버른 빅토리 하이라이트</div>
-									<div class="source">AFC 챔피언스리그</div>
-									<div class="source-right">10시간 전</div>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="more-box">
-						<button>
-							<i class="more-ico"></i>새로운글 더보기
-						</button>
-					</div>
+					<div class="cont-enter"></div>
+					<div class="cont-car"></div>
+					<div class="cont-webtoon"></div>
+					<div class="cont-finance"></div>
+					<div class="cont-food"></div>
+					<div class="cont-game"></div>
+					<div class="cont-movie"></div>
 				</div>
+				
 			</div>
 			<div class="right">
 				<div class="login-box box">
@@ -1277,7 +1342,14 @@
 					<div class="timesquare-card">
 						<div class="timesquare-wrap">
 							<div class="timesquare-rolling">
-								<a href="#" class="card">aaaaa</a>
+								<a href="#" class="card stock">
+									<span class="stock-title">증시</span>
+									<div class="stock-box">
+										<span class="name">코스닥</span>
+										<span class="current">946.39</span>
+										<span class="rate rate-up">2.35 +0.25%</span>
+									</div>
+								</a>
 								<a href="#" class="card">bbbbb</a>
 								<a href="#" class="card">ccccc</a>
 								<a href="#" class="card">ddddd</a>

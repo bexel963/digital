@@ -1004,44 +1004,44 @@ ul,ol{
 .left .themecast-box .group-menu li:last-child>a{
 	border-right: none;
 }
-.left .themecast-box .enter:hover		{			color: #e65da0;		}
-.left .themecast-box .sports:hover	{			color: #0147b5;		}
-.left .themecast-box .car:hover			{			color: #4a94e1;		}
-.left .themecast-box .webtoon:hover	{			color: #66c971;		}
-.left .themecast-box .finance:hover	{			color: #35ae5e;		}
-.left .themecast-box .food:hover		{			color: #e77c43;		}
-.left .themecast-box .game:hover		{			color: #5bb8e1;		}
-.left .themecast-box .movie:hover		{			color: #1a2f63;		}
-.left .themecast-box .job:hover			{			color: #e65da0;		}
-.left .themecast-box .tech:hover		{			color: #0147b5;		}
-.left .themecast-box .traval:hover	{			color: #4a94e1;		}
-.left .themecast-box .sci:hover			{			color: #66c971;		}
-.left .themecast-box .living:hover	{			color: #35ae5e;		}
-.left .themecast-box .health:hover	{			color: #e77c43;		}
-.left .themecast-box .business:hover{			color: #5bb8e1;		}
-.left .themecast-box .marry:hover		{			color: #1a2f63;		}
+.left .themecast-box .enter:hover		{		color: #e65da0;		}
+.left .themecast-box .sports:hover		{		color: #0147b5;		}
+.left .themecast-box .car:hover			{		color: #4a94e1;		}
+.left .themecast-box .webtoon:hover		{		color: #66c971;		}
+.left .themecast-box .finance:hover		{		color: #35ae5e;		}
+.left .themecast-box .food:hover		{		color: #e77c43;		}
+.left .themecast-box .game:hover		{		color: #5bb8e1;		}
+.left .themecast-box .movie:hover		{		color: #1a2f63;		}
+.left .themecast-box .job:hover			{		color: #e65da0;		}
+.left .themecast-box .tech:hover		{		color: #0147b5;		}
+.left .themecast-box .traval:hover		{		color: #4a94e1;		}
+.left .themecast-box .sci:hover			{		color: #66c971;		}
+.left .themecast-box .living:hover		{		color: #35ae5e;		}
+.left .themecast-box .health:hover		{		color: #e77c43;		}
+.left .themecast-box .business:hover	{		color: #5bb8e1;		}
+.left .themecast-box .marry:hover		{		color: #1a2f63;		}
 .left .themecast-box .group-menu li>a.select{
 	position: relative;
 	margin: 0 -1px;
 	border-radius: 1px;
 	color: #fff;
 }
-.left .themecast-box .enter.select	{			background-color: #e65da0;		}
-.left .themecast-box .sports.select	{			background-color: #0147b5;		}
-.left .themecast-box .car.select		{			background-color: #4a94e1;		}
-.left .themecast-box .webtoon.select{			background-color: #66c971;		}
-.left .themecast-box .finance.select{			background-color: #35ae5e;		}
-.left .themecast-box .food.select		{			background-color: #e77c43;		}
-.left .themecast-box .game.select		{			background-color: #5bb8e1;		}
-.left .themecast-box .movie.select	{			background-color: #1a2f63;		}
-.left .themecast-box .job.select		{			background-color: #e65da0;		}
-.left .themecast-box .tech.select		{			background-color: #0147b5;		}
-.left .themecast-box .traval.select	{			background-color: #4a94e1;		}
-.left .themecast-box .sci.select		{			background-color: #66c971;		}
-.left .themecast-box .living.select	{			background-color: #35ae5e;		}
-.left .themecast-box .health.select	{			background-color: #e77c43;		}
-.left .themecast-box .business.select{		background-color: #5bb8e1;		}
-.left .themecast-box .marry.select	{			background-color: #1a2f63;		}
+.left .themecast-box .enter.select		{		background-color: #e65da0;		}
+.left .themecast-box .sports.select		{		background-color: #0147b5;		}
+.left .themecast-box .car.select		{		background-color: #4a94e1;		}
+.left .themecast-box .webtoon.select	{		background-color: #66c971;		}
+.left .themecast-box .finance.select	{		background-color: #35ae5e;		}
+.left .themecast-box .food.select		{		background-color: #e77c43;		}
+.left .themecast-box .game.select		{		background-color: #5bb8e1;		}
+.left .themecast-box .movie.select		{		background-color: #1a2f63;		}
+.left .themecast-box .job.select		{		background-color: #e65da0;		}
+.left .themecast-box .tech.select		{		background-color: #0147b5;		}
+.left .themecast-box .traval.select		{		background-color: #4a94e1;		}
+.left .themecast-box .sci.select		{		background-color: #66c971;		}
+.left .themecast-box .living.select		{		background-color: #35ae5e;		}
+.left .themecast-box .health.select		{		background-color: #e77c43;		}
+.left .themecast-box .business.select	{		background-color: #5bb8e1;		}
+.left .themecast-box .marry.select		{		background-color: #1a2f63;		}
 .footer{
 	background-color: #fafbfc;
 	border-top: 1px solid #e4e8eb;
@@ -1645,7 +1645,7 @@ ul,ol{
 	display: none;
 }
 .menu .menu-service-box .list-service{
-	width: 161px;
+	width: 160px;
 	box-sizing: border-box;
 	float: left;
 	padding: 0 18px 0 19px;

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/jquery.js"></script>
+    <!-- 구글에 animate.css 검색 -->
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  <style>
+      .head{
+          margin: 100px;
+          text-align: center;
+          cursor: pointer;
+      }
+  </style>
+</head>
+<body> 
+    <button class="bounce">bounce</button>
+    <button class="backindown">backindown</button>
+    <h1 class="head">Hello</h1>
+    
+    <script>
+        $(function(){
+            $('.head').hover(function(){
+                $(this).addClass('head animate__animated animate__bounce animate__infinite');
+            },function(){
+                $(this).removeClass('head animate__animated animate__bounce animate__infinite');
+            })
+
+            $('.bounce').click(function(){
+               $('.head').attr('class', 'head animate__animated animate__bounce')
+            })
+            $('.backindown').click(function(){
+                $('.head').attr('class', 'head animate__animated animate__backInDown')
+            })
+            $('.head').on('animationend',function(){    // animation이 끝나면 다음 기능을 수행한다.
+                $('.head').attr('class','head');
+            })
+        })
+    </script>
+</body>
+</html>

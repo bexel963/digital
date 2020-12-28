@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스와이퍼 예제</title>
+    <!-- 구글에서 swiper 검색 후 Get Started에서 링크 가져옴 -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+
+    <style>
+        html,
+        body {
+          position: relative;
+          height: 100%;
+        }
+    
+        body {
+          background: #eee;
+          font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+          font-size: 14px;
+          color: #000;
+          margin: 0;
+          padding: 0;
+        }
+    
+        .swiper-container {
+          width: 500px;
+          height: 500px;
+        }
+    
+        .swiper-slide {
+          text-align: center;
+          font-size: 18px;
+          background: rgb(39, 37, 37);
+    
+          /* Center slide text vertically */
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+        }
+      </style>
+</head>
+<body>
+    <!-- Swiper -->
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img width="500px" height="500px" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAyMDA3MjVfMjk1%2FMDAxNTk1Njc1NTU2NzQ2.EASb4Zu9gtLKmdeopgYc9Pf51uTa_DICZB8i4ye-NeYg.UPq2zBdfP8VXONuJArZ2lR5-TyT4luao03EYtWtJKEog.JPEG%2F%25C4%25A1%25B8%25C5%25BA%25B8%25C7%25E8%25BB%25F3%25C7%25B01.jpg&type=sc960_832" alt=""></div>
+      <div class="swiper-slide"><img width="500px" height="500px" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAyMDAzMjBfMjY2%2FMDAxNTg0NjY4NzcyMDY3.FMLpoeezghjXRzIFVaEH8eF2Fcia5QUMXsoEcfSLcbEg.EZxr-OEyBI6JoPExPZPnUItY44qHhC45HV5pv66DgtMg.JPEG%2Fa2.jpg&type=sc960_832" alt=""></div>
+      <div class="swiper-slide"><img width="500px" height="500px" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20150915_205%2Fhejin0307_1442311601066nSQDz_JPEG%2F%25B3%25FA_%25BC%25BA%25B0%25DD4.jpg&type=sc960_832" alt=""></div>
+      <div class="swiper-slide"><img width="500px" height="500px" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2F20160511_36%2Fborudeng_1462952663738LIpPY_PNG%2F177.png&type=sc960_832" alt=""></div>
+      <div class="swiper-slide"><img width="500px" height="500px" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20120824_57%2Fbumgoo02_1345795574401Q9eBk_JPEG%2F5152126859_67e9d2cc2c_z_large.jpg&type=sc960_832" alt=""></div>
+      <div class="swiper-slide"><img width="500px" height="500px" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2F20150726_87%2Fbakhoyong_1437910425426WlU5G_JPEG%2F%25C1%25D6%25BB%25E7%25B1%25E2_%25C0%25CC%25B9%25CC%25C1%25F6.jpg&type=sc960_832" alt=""></div>
+      <div class="swiper-slide"><img width="500px" height="500px" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20101218_278%2Fyhcs211_12926550621155bAqe_JPEG%2F31.jpg&type=sc960_832" alt=""></div>
+      <div class="swiper-slide"><img width="500px" height="500px" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20120407_52%2Fitgirlbag_1333793223004OtfTS_JPEG%2Fk42.jpg&type=sc960_832" alt=""></div>
+      <div class="swiper-slide"><img width="500px" height="500px" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20110712_81%2Falswn1189_13104547937356r5Bo_JPEG%2F2.jpg&type=sc960_832" alt=""></div>
+      <div class="swiper-slide"><img width="500px" height="500px" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20111027_157%2Fmsj8905_1319655679839Hnycz_JPEG%2F3069.jpg&type=sc960_832" alt=""></div>
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+    <!-- Add Arrows -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+
+      <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper('.swiper-container', {      // 해당 선택자에 swiper 기능 만듦
+      pagination: {
+        el: '.swiper-pagination',   // el은 요소 / 해당 선택자 안에 페이지네이션 코드를 자동으로 만들어줌
+        type: 'progressbar',
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>
+  </div>
+</body>
+</html>
