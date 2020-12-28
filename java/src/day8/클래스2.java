@@ -31,7 +31,6 @@ public class 클래스2 {
 			System.out.println();
 		}
 		
-	
 	}
 }
 
