@@ -36,4 +36,18 @@
 	    </beans:property>
 	</beans:bean>
 
+	<beans:bean id="loginInterceptor" class="kr.green.test.interceptor.LoginInterceptor"></beans:bean>
+	<beans:bean id="authInterceptor" class="kr.green.test.interceptor.AuthInterceptor"></beans:bean>
+	<interceptors>
+	    <interceptor>
+	        <mapping path="/login"/>
+	        <beans:ref bean="loginInterceptor"/>	<!-- url이 login이면 인터셉터 한다. -->
+	    </interceptor>
+	    <interceptor>
+	        <mapping path="/board/register"/>
+	        <mapping path="/board/modify"/>
+	        <mapping path="/board/delete"/>
+	        <beans:ref bean="authInterceptor"/>
+		</interceptor>
+	</interceptors>
 </beans:beans>

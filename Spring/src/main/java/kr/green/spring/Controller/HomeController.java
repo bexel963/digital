@@ -1,11 +1,16 @@
-package kr.green.spring.Controller;
+package kr.green.spring.controller;
 
-import java.util.*;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,111 +18,81 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.green.spring.service.UserService;
 import kr.green.spring.vo.UserVo;
 
+/**
+ * Handles requests for the application home page.
+ */
 @Controller
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@Autowired
-	UserService userService;
+	private UserService userService;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView homeGet(ModelAndView mv, String name) {
-		System.out.println("이름(get) : " + name);
-		//http://localhost:8080/spring/?name=임꺽정
-		mv.setViewName("/main/home");
-		return mv;
-	}
-	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public ModelAndView homePost(ModelAndView mv, String name, String fruit) {
-		System.out.println("이름(post) : " + name);
-		System.out.println("과일(post) : " + fruit);
-		mv.setViewName("redirect:/");
-		return mv;
-	}
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public ModelAndView testGet(ModelAndView mv) {
+	/* 홈 */
+	@RequestMapping(value = "/", method = RequestMethod.GET)		//url이 localhost:8080/spring 가 기본 입력 되어있음
+	public ModelAndView home(Locale locale, ModelAndView mv) {
 		
-		//model.addAttribute("변수명",값);
-		//값으로 문자열, 정수, 실수, 객체 등 다양한 값들을 보낼 수 있다
-		//model.addAttribute("name","홍길동");
-		mv.addObject("name", "홍길동");
-		mv.setViewName("/main/test");
+		mv.setViewName("/main/home");	// 어떠한 jsp와 연결할 것인지 물어보는 메소드
 		return mv;
 	}
+	
+	/* 로그인 */
+	@RequestMapping(value = "/login", method = RequestMethod.GET)	//url이 localhost:8080/spring 가 기본 입력 되어있음
+	public ModelAndView loginGet(Locale locale, ModelAndView mv) {
+		
+		mv.setViewName("/main/login");	// 어떠한 jsp와 연결할 것인지 물어보는 메소드
+		return mv;
+	}
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ModelAndView loginPost(Locale locale, ModelAndView mv, String username, String password) {
+		
+		System.out.println("id: " + username);
+		System.out.println("pw: " + password);
+		// 수정 전 : 아이디와 패스워드가 일치하는 회원이 있으면 true, 없으면 false를 가져옴
+		// boolean isUser = userService.isUser(username, password);
+		// 수정 후 : 아이디와 패스워드가 일치하는 회원이 있으면 회원 정보를 가져오고, 없으면 null을 가져옴
+		UserVo isUser = userService.isUser(username, password);
+		
+		mv.addObject("user", isUser);	// 인터셉터가 가로챌수있게 컨트롤러에서 화면으로 데이터를 전송해준다.
+		if(isUser != null) {
+			mv.setViewName("redirect:/");	// 로그인 성공시 회원이면 메인창으로 보냄
+		}else {
+			mv.setViewName("redirect:/login");	// 로그인 실패시 회원이 아니면 login창으로 보냄
+		}
+		return mv;
+	}
+	
+	/* 회원가입 */
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
-	public ModelAndView signupGet(ModelAndView mv) {
-		mv.setViewName("/main/signup");
+	public ModelAndView signupGet(Locale locale, ModelAndView mv) {
+		
+		mv.setViewName("/main/signup");	// 어떠한 jsp와 연결할 것인지 물어보는 메소드
 		return mv;
 	}
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public ModelAndView signupPost(ModelAndView mv,UserVo user) {
+	public ModelAndView signupPost(Locale locale, ModelAndView mv, UserVo user) {
+		
 		System.out.println(user);
-		//회원가입을 진행시키기 위해 userService에게 일을 시키기위한 메소드를 생성해
-		//보세요.
-		boolean isSignup = userService.signup(user);
-		if(isSignup) {
-			mv.setViewName("redirect:/login");	
+		
+		boolean signup = userService.signup(user);
+		System.out.println(signup);
+		if(signup) {
+			//mv.setViewName("/main/home");	 localhost:8080/spring/signup	- url만 그대로고 화면만 home화면 보여주는거
+			mv.setViewName("redirect:/");	// localhost:8080/test/			- url이 home으로 바뀜
 		}else {
 			mv.setViewName("redirect:/signup");
 		}
 		return mv;
 	}
-	@RequestMapping(value = "/tiles", method = RequestMethod.GET)
-	public ModelAndView tilesGet(ModelAndView mv) {
-		mv.setViewName("/main/tiles");
+	
+	/* 로그아웃 */
+	@RequestMapping(value = "/signout", method = RequestMethod.GET)
+	public ModelAndView signoutGet(ModelAndView mv, HttpServletRequest request) {
+		// 세션에 저장된 유저 정보를 삭제
+		request.getSession().removeAttribute("user");
+		mv.setViewName("redirect:/");	 
 		return mv;
 	}
-	@RequestMapping(value = "/tiles2", method = RequestMethod.GET)
-	public ModelAndView tiles2Get(ModelAndView mv) {
-		mv.setViewName("/main/tiles2");
-		return mv;
-	}
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView listGet(ModelAndView mv) {
-		ArrayList<String> list = new ArrayList<String>();
-		list.add("홍길동");
-		list.add("임꺽정");
-		list.add("이순신");
-		mv.addObject("list",list);
-		mv.addObject("option","번호");
-		mv.setViewName("/main/list");
-		String email = userService.getEmail("abcd12345");
-		String name = userService.getName("abcd1234");
-		UserVo user = userService.getUser("abcd1234");
-		//아이디가 "abcd1234"와 일치하는 회원 정보의 나이를 가져오는 코드
-		int age = userService.getAge("abcd1234");
-		System.out.println(email);
-		System.out.println(name);
-		System.out.println(user);
-		System.out.println(age);
-		return mv;
-	}
-	@RequestMapping(value = "/user/list", method = RequestMethod.GET)
-	public ModelAndView userListGet(ModelAndView mv) {
-		ArrayList<UserVo> list = new ArrayList<UserVo>();
-		//모든 회원 정보를 가져오는 코드
-		list = userService.getAllUser();
-		mv.addObject("list",list);
-		mv.setViewName("/main/list2");
-		return mv;
-	}
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView loginGet(ModelAndView mv) {
-		
-		mv.setViewName("/main/login");
-		return mv;
-	}
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView loginPost(ModelAndView mv, String id, String pw) {
-		System.out.println("id : " + id);
-		System.out.println("pw : " + pw);
-		boolean isUser = userService.isUser(id, pw);
-		if(isUser) {
-			mv.setViewName("redirect:/");//로그인 성공시
-		}else {
-			mv.setViewName("redirect:/login");//로그인 실패시	
-		}
-		return mv;
-	}
+
 }

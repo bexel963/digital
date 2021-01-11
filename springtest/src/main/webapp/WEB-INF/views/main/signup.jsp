@@ -23,7 +23,7 @@
 </head>
 <body>
     <div class="container">
-        <form action="/test/signup" method="post">
+        <form action="<%=request.getContextPath()%>/signup" method="post">
             <h1 class="text-primary">회원가입</h1>
             <div class="form-group">
                 <label for="id">아이디</label>
@@ -40,6 +40,10 @@
             <div class="form-group">
                 <label for="name">이름</label>
                 <input type="text" class="form-control" id="usr" name="name" value="${user.email}">
+            </div>
+            <div class="form-group">
+                <label for="age">나이</label>
+                <input type="text" class="form-control" id="usr" name="age" value="${user.age}">
             </div>
             <div class="form-group">
                 <label for="email">이메일</label>

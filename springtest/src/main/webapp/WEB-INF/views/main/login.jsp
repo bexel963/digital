@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,17 +8,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- url¿Ã localhost:8080/test/login <-> HomeController¿« url∞˙ ¡∂±› ¥Ÿ∏ß -->
-	<form action="/test/login" method="post">
-	    <div class="form-group">
-	      <label for="usr">ID:</label>
-	      <input type="text" class="form-control" id="usr" name="username">
-	    </div>
-	    <div class="form-group">
-	      <label for="pwd">PW:</label>
-	      <input type="password" class="form-control" id="pwd" name="password">
-	    </div>
-	    <button type="submit" class="btn btn-primary col-12">∑Œ±◊¿Œ</button>
-	</form>
+	<c:if test="${user == null}">
+		<form action="<%=request.getContextPath()%>/login" method="post">	<!-- urlÏù¥ localhost:8080/test/login <-> HomeControllerÏùò urlÍ≥º Ï°∞Í∏à Îã§Î¶Ñ -->
+		    <div class="form-group">
+		      <label for="usr">ID:</label>
+		      <input type="text" class="form-control" id="usr" name="username">
+		    </div>
+		    <div class="form-group">
+		      <label for="pwd">PW:</label>
+		      <input type="password" class="form-control" id="pwd" name="password">
+		    </div>
+		    <button type="submit" class="btn btn-primary col-12">Î°úÍ∑∏Ïù∏</button>
+		</form>
+	</c:if>
 </body>
 </html>

@@ -23,7 +23,7 @@
 </head>
 <body>
     <div class="container">
-        <form action="" method="post">
+        <form action="<%=request.getContextPath()%>/signup" method="post">
             <h1 class="text-primary">회원가입</h1>
             <div class="form-group">
                 <label for="id">아이디</label>
@@ -38,7 +38,15 @@
                 <input type="password" class="form-control" id="usr" name="pw2" value="${user.pw2}">
             </div>
             <div class="form-group">
-                <label for="pw2">이메일</label>
+                <label for="name">이름</label>
+                <input type="text" class="form-control" id="usr" name="name" value="${user.email}">
+            </div>
+            <div class="form-group">
+                <label for="age">나이</label>
+                <input type="text" class="form-control" id="usr" name="age" value="${user.age}">
+            </div>
+            <div class="form-group">
+                <label for="email">이메일</label>
                 <input type="email" class="form-control" id="usr" name="email" value="${user.email}">
             </div>
             <div>성별</div>
@@ -54,12 +62,10 @@
             </div>
             <div class="form-group">
                 <label for="num">전화번호</label>
-                <input type="text" class="form-control" id="usr" name="num" value="${user.num}">
+                <input type="text" class="form-control" id="usr" name="home" value="${user.num}">
             </div>
             <button type="submit" class="btn btn-outline-primary col-12">회원가입</button>
         </form>
-        ${user}			<!-- user클래스의 toString이 호출된다. -->
-        ${user.test}	<!-- getTest()라는 멤버메소드를 호출한다. -->
     </div>
 </body>
 </html>

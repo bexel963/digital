@@ -10,4 +10,7 @@ public interface UserDao {
 	
 	public Uservo getUser(@Param("id")String id);
 
+	public void insertUser(@Param("user")Uservo user);
+
+
 }

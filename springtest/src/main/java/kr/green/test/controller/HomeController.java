@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,20 +28,12 @@ public class HomeController {
 	
 	@Autowired
 	private UserService userService;
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	//url이 localhost:8080/test 가 기본 입력 되어있음
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	
+	/* 홈 */
+	@RequestMapping(value = "/", method = RequestMethod.GET)		//url이 localhost:8080/test 가 기본 입력 되어있음
 	public ModelAndView home(Locale locale, ModelAndView mv) {
 		
-		//abcd1234의 이메일을 가져옴
-		String id = "abcd1234";
-		String email = userService.getEmail(id);
-		Uservo user = userService.getUser(id);
-		System.out.println(email);
-		System.out.println(user);
-		mv.setViewName("/main/home");	// 어떠한 jsp와 연결할 것인지 물어보는 메소드
+		mv.setViewName("/main/login");	// 어떠한 jsp와 연결할 것인지 물어보는 메소드
 		return mv;
 	}
 	
@@ -52,17 +46,19 @@ public class HomeController {
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView loginPost(Locale locale, ModelAndView mv, String username, String password) {
+		
 		System.out.println("id: " + username);
 		System.out.println("pw: " + password);
+		// 수정 전 : 아이디와 패스워드가 일치하는 회원이 있으면 true, 없으면 false를 가져옴
+		// boolean isUser = userService.isUser(username, password);
+		// 수정 후 : 아이디와 패스워드가 일치하는 회원이 있으면 회원 정보를 가져오고, 없으면 null을 가져옴
+		Uservo isUser = userService.isUser(username, password);
 		
-		boolean isUser = userService.isUser(username, password);	// 회원인지 아닌지를 물어보는 메소드
-		System.out.println("결과 : " + isUser);
-		
-		mv.setViewName("/main/login");	// 어떠한 jsp와 연결할 것인지 물어보는 메소드
-		if(isUser) {
-			mv.setViewName("redirect:/");	// 회원이면 메인창으로 보냄
+		mv.addObject("user", isUser);
+		if(isUser != null) {
+			mv.setViewName("redirect:/");	// 로그인 성공시 회원이면 메인창으로 보냄
 		}else {
-			mv.setViewName("redirect:/login");	// 회원이 아니면 login창으로 보냄
+			mv.setViewName("redirect:/login");	// 로그인 실패시 회원이 아니면 login창으로 보냄
 		}
 		return mv;
 	}
@@ -76,11 +72,28 @@ public class HomeController {
 	}
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public ModelAndView signupPost(Locale locale, ModelAndView mv, Uservo user) {
+		
 		System.out.println(user);
 		
 		boolean signup = userService.signup(user);
 		System.out.println(signup);
-		mv.setViewName("/main/signup");	// 어떠한 jsp와 연결할 것인지 물어보는 메소드
+		if(signup) {
+			//mv.setViewName("/main/home");	 localhost:8080/test/signup	- url만 그대로고 화면만 home화면 보여주는거
+			mv.setViewName("redirect:/");	// localhost:8080/test/			- url이 home으로 바뀜
+		}else {
+			mv.setViewName("redirect:/signup");
+		}
 		return mv;
 	}
+	
+	/* 로그아웃 */
+	@RequestMapping(value = "/signout", method = RequestMethod.GET)
+	public ModelAndView signoutGet(Locale locale, ModelAndView mv, HttpServletRequest r) {
+		// 세션에 저장된 유저 정보를 삭제
+		r.getSession().removeAttribute("user");
+		mv.setViewName("redirect:/");	 
+		return mv;
+	}
+	
+	
 }

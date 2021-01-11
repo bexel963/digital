@@ -3,10 +3,11 @@ package kr.green.spring.vo;
 public class UserVo {
 	private String id;
 	private String pw;
-	private String pw2;
+	private String name;
+	private int age;
 	private String email;
-	private String gender;
-	private String num;
+	private String home;
+	
 	public String getId() {
 		return id;
 	}
@@ -19,11 +20,17 @@ public class UserVo {
 	public void setPw(String pw) {
 		this.pw = pw;
 	}
-	public String getPw2() {
-		return pw2;
+	public String getName() {
+		return name;
 	}
-	public void setPw2(String pw2) {
-		this.pw2 = pw2;
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
 	}
 	public String getEmail() {
 		return email;
@@ -31,24 +38,17 @@ public class UserVo {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getGender() {
-		return gender;
+	public String getHome() {
+		return home;
 	}
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-	public String getNum() {
-		return num;
-	}
-	public void setNum(String num) {
-		this.num = num;
+	public void setHome(String home) {
+		this.home = home;
 	}
 	@Override
 	public String toString() {
-		return "UserVo [id=" + id + ", pw=" + pw + ", pw2=" + pw2 + ", email=" + email + ", gender=" + gender + ", num="
-				+ num + "]";
+		return "Uservo [id=" + id + ", pw=" + pw + ", name=" + name + ", age=" + age + ", email=" + email + ", home="
+				+ home + "]";
 	}
-	public String getTest() {
-		return "테스트입니다.";
-	}
+	
+	
 }
