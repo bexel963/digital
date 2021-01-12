@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import kr.green.spring.dao.BoardDao;
 import kr.green.spring.pagination.Criteria;
 import kr.green.spring.vo.BoardVo;
+import kr.green.spring.vo.FileVo;
 import kr.green.spring.vo.UserVo;
 
 @Service
@@ -48,6 +49,7 @@ public class BoardServiceImp implements BoardService {
 		}
 		board.setIsDel("N");
 		boardDao.modifyBoard(board); 
+		boardDao.deleteFile(board.getNum());	// 기존 첨부파일 삭제
 		
 	}
 
@@ -75,13 +77,21 @@ public class BoardServiceImp implements BoardService {
 	}
 
 	@Override
-	public int getTotalCount() {
-		return boardDao.getTotalCount();
+	public int getTotalCount(Criteria cri) {
+		return boardDao.getTotalCount(cri);
 	}
 
+	@Override
+	public void registerFile(int num, String originalFilename, String fileName) {
+		boardDao.insertFile(num, originalFilename, fileName);
+	}
 
+	@Override
+	public ArrayList<FileVo> getFileList(Integer num) {
+		if(num == null) {
+			return null;
+		}
+		return boardDao.getFileList(num);
+	}
 
-
-
-	
 }

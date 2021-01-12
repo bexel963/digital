@@ -15,16 +15,17 @@
 		<if test="cri.type == 4">
 			and writer like concat('%', #{cri.search}, '%')
 		</if>
-		order by num desc limit #{cri.pageStart}, #{cri.perPageNum}
+		order by num desc limit #{cri.pageStart}, #{cri.perPageNum} <!--Criteria클래스에 pageStart라는 멤버변수가 없어도 #{cri.pageStart}를 하면 멤버 메소드 getPageStart()가 호출된다.-->
+		
 	</select>
 	
 	<select id="getBoard" resultType="kr.green.spring.vo.BoardVo">
 		select * from board where num = #{num} and isDel = 'N'
 	</select>
 	
-	<select id="registerBoard" resultType="kr.green.spring.vo.BoardVo">
+	<insert id="registerBoard" useGeneratedKeys="true" keyProperty="board.num" parameterType="kr.green.spring.vo.BoardVo">
 		insert into board(title, writer, content) values(#{board.title}, #{board.writer}, #{board.content})
-	</select>
+	</insert>
 	
 	<update id="modifyBoard" parameterType="kr.green.spring.vo.BoardVo">
 		update board set title = #{board.title}, content = #{board.content}, isDel = #{board.isDel} where num = #{board.num}
@@ -35,8 +36,33 @@
 	</update>
 	
 	<select id="getTotalCount" resultType="int">
-		select count(*) from board where isDel = 'N' 
+		select count(*) from board where isDel = 'N'
+		<if test="cri.type == 1">
+			and (title like concat('%', #{cri.search}, '%') or content like concat('%', #{cri.search}, '%') or writer like concat('%', #{cri.search}, '%'))
+		</if>
+		<if test="cri.type == 2">
+			and title like concat('%', #{cri.search}, '%')
+		</if>
+		<if test="cri.type == 3">
+			and content like concat('%', #{cri.search}, '%')
+		</if>
+		<if test="cri.type == 4">
+			and writer like concat('%', #{cri.search}, '%')
+		</if> 
 	</select>
+	
+	<insert id="insertFile">
+		insert into files(boardNum, oriFilename, filename) values(#{num}, #{oriFilename}, #{filename})
+	</insert>
+	
+	<select id="getFileList" resultType="kr.green.spring.vo.FileVo">
+		select * from files where boardNum = #{num} and isDel = 'N'
+	</select>
+
+	<update id="deleteFile">
+		update files set isDel='Y' where boardNum = #{num}
+	</update>
+	
 </mapper>
 
 

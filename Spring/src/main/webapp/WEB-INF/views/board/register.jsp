@@ -10,7 +10,7 @@
 <body>
 	<div class="container">
 	  <h2><br>게시글 등록</h2>
-	  <form action="<%=request.getContextPath()%>/board/register" method="post">
+	  <form action="<%=request.getContextPath()%>/board/register" method="post" enctype="multipart/form-data">
 	    <div class="form-group">
 	      <label><br>제목</label>
 	      <input type="text" class="form-control" name="title" >
@@ -23,6 +23,18 @@
 	      <label>내용</label>
 	      <textarea rows="10" class="form-control" name="content"></textarea>	<!-- 쌍태그는 값을 value 말고 쌍태그 사이에 넣는다. -->
 	    </div>
+	    <div class="form-group">
+	        <label>파일</label>
+	        <input type="file" class="form-control" name="fileList"/>
+    	</div>
+    	<div class="form-group">
+	        <label>파일</label>
+	        <input type="file" class="form-control" name="fileList"/>
+    	</div>
+    	<div class="form-group">
+	        <label>파일</label>
+	        <input type="file" class="form-control" name="fileList"/>
+    	</div>
 	    <button type="submit" class="btn btn-outline-dark">등록</button><br>
 	  </form>
 	</div>

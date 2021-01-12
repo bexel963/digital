@@ -1,18 +1,18 @@
 package kr.green.spring.pagination;
-
+// 현재 활성화된 페이지가 포함된 페이지들을 나타내는 클래스
 public class PageMaker {
-	private int totalCount;	// 총 개시글 수
-	private int startPage;
-	private int endPage;
+	private int totalCount;		// 총 개시글 수 - 마지막 페이지의 끝 페이지 번호
+	private int startPage;		// 현재 활성화된 페이지를 포함하는 페이지들의 시작페이지
+	private int endPage;		// 현재 활성화된 페이지를 포함하는 페이지들의 마지막페이지
 	private boolean prev;
 	private boolean next;
-	private int displayPageNum;
-	private Criteria criteria;
+	private int displayPageNum;	// 한 페이지메이커가 보여줄 페이지의 갯수
+	private Criteria criteria;	// 현재 페이지 정보
 	
 	public PageMaker(Criteria cri, int displayPageNum, int totalCount) {
 		this.criteria = cri;
 		this.displayPageNum = displayPageNum;
-		this.setTotalCount(totalCount);
+		this.setTotalCount(totalCount);		// 생성자 호출하면서 calcData() 호출
 	}
 	
 	/* endPage, startPage, prev, next 값 계산 */
@@ -39,9 +39,9 @@ public class PageMaker {
 	public int getTotalCount() {
 		return totalCount;
 	}
-	public void setTotalCount(int totalCount) {
+	public void setTotalCount(int totalCount) {		
 		this.totalCount = totalCount;
-		calcData();
+		calcData();						
 	}
 	public int getStartPage() {
 		return startPage;

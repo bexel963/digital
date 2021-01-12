@@ -36,13 +36,21 @@
 	      <label>내용</label>
 	      <textarea rows="10" class="form-control" readonly>${board.content}</textarea>	<!-- 쌍태그는 값을 value 말고 쌍태그 사이에 넣는다. -->
 	    </div>
+	    <c:if test="${fList.size() != 0}">
+		    <div class="form-group">
+		      <label for="cotent">첨부파일</label>
+		      <c:forEach items="${fList}" var="file">
+		      	<div><a href="<%=request.getContextPath()%>/board/download?fileName=${file.filename}">${file.oriFilename}</a></div>
+		      </c:forEach>
+		    </div>
+	    </c:if>
 	  </form>
 	  </c:if>
 	  <c:if test="${board == null}">
 	  	<h1>존재하지 않는 게시글 입니다.</h1>
 	  </c:if>
 	</div>
-	<a href="<%=request.getContextPath()%>/board/list"><button type="button" class="btn btn-outline-dark">목록</button></a>
+	<a href="<%=request.getContextPath()%>/board/list?page=${cri.page}&search=${cri.search}&type=${cri.type}"><button type="button" class="btn btn-outline-dark">목록</button></a>
 	<a href="<%=request.getContextPath()%>/board/register"><button type="button" class="btn btn-outline-dark">글쓰기</button></a>
 	<c:if test="${user != null && user.id == board.writer}">
 	<a href="<%=request.getContextPath()%>/board/modify?num=${board.num}"><button type="button" class="btn btn-outline-dark">게시글 수정</button></a>
