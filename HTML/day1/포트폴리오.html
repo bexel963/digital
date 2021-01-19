@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        a{
+            text-decoration: none;
+            color: black;
+        }
+        .mobile{
+            display: none;
+        }
+        .mobile .header{
+            height: 40px;
+            width: 100%;
+            background-color: #fbceb1;
+            padding-top: 15px;
+        }
+        .mobile .body{
+            margin-top: 10px;
+            height: 100vh;
+            width: 100%;
+            border: 1px solid black;
+        }
+        .mobile .left{
+            float: left;
+            margin-left: 15px;
+        }
+        .mobile .right{
+            float: right;
+            margin-right: 15px;
+        }
+        .mobile .search, .mobile .s-btn, .pc .search, .pc .s-btn{
+            border-color: red;
+            height: 20px;
+        }
+        .mobile .s-btn, .pc .s-btn{
+            background-color: #fbceb1;
+            height: 25px;
+        }
+     
+        .pc .header{
+            height: 40px;
+            width: 100%;
+            background-color: #fbceb1;
+            padding-top: 15px;
+        }
+        .pc .left{
+            float: left;
+        }
+        .pc .right{
+            float: right;
+        }
+        .pc .menu{
+            float: left;
+            margin-left: 30px;
+        }
+        .pc .menu a{
+            margin-left: 20px;
+        }
+        .pc label{
+            float: left;
+            margin-left:20px;
+        }
+        .pc .body{
+            margin-top: 10px;
+            height: 100vh;
+            width: 100%;
+            border: 1px solid black;
+        }
+        @media (max-width: 641px){  
+            .pc{
+                display: none;
+            }
+            .mobile{
+                display: block;
+            }
+        }
+        
+    </style>
+    <script src="https://kit.fontawesome.com/022cf171a0.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="mobile">
+        <div class="header">
+            <div class="left">
+                <label for="">로고</label>
+            </div>
+            <div class="right">
+                <input type="text" class="search">
+                <button class="s-btn">검색</button>
+                <button class="ham-menu"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+        <div class="body"></div>
+    </div>
+
+    <div class="pc">
+        <div class="header">
+            <div class="left">
+                <label for="">로고</label>
+                <div class="menu">
+                    <a href="#">메뉴1</a>
+                    <a href="#">메뉴2</a>
+                    <a href="#">메뉴3</a>
+                </div>
+            </div>
+            <div class="right">
+                <input type="text" class="search">
+                <button class="s-btn">검색</button>
+            </div>
+        </div>
+        <div class="body"></div>
+    </div>
+</body>
+</html>

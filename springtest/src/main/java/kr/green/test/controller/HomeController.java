@@ -1,7 +1,6 @@
 package kr.green.test.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,12 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.test.service.UserService;
+import kr.green.test.vo.TestVo;
 import kr.green.test.vo.Uservo;
 
 /**
@@ -92,6 +91,78 @@ public class HomeController {
 		// 세션에 저장된 유저 정보를 삭제
 		r.getSession().removeAttribute("user");
 		mv.setViewName("redirect:/");	 
+		return mv;
+	}
+	
+	/* 서버에서 화면으로 데이터 전송 */
+	@RequestMapping(value = "/test1", method = RequestMethod.GET)
+	public ModelAndView test1Get(Locale locale, ModelAndView mv, HttpServletRequest r) {
+		String studentName = "홍길동";
+		int studentAge = 18;
+		/* 문제
+		  	- 서버에서 보낸 데이터를 이용하여 학생 이름과 나이를 화면에 출력 되도록 test1.jsp 코드를 수정해 보세요
+		*/
+		mv.addObject("name", studentName);
+		mv.addObject("age", studentAge);
+		
+		TestVo testVo = new TestVo("임꺾정", 17);
+		
+		/* 문제
+		  	- 서버에서 보낸 testVo 데이터를 이용하여 학생 이름과 나이를 화면에 출력되도록 test1.jsp 코드를 수정해보세요.
+		*/
+		mv.addObject("testVo", testVo);
+		
+		/* 문제
+		  	- 서버에서 보낸 start와 end를 이용하여 start부터 end사이의 숫자를 출력하는 코드 test1.jsp에 작성
+		*/
+		mv.addObject("start", 1);
+		mv.addObject("end", 5);
+		
+		ArrayList<TestVo> list = new ArrayList<TestVo>();
+		list.add(new TestVo("김철수",20));
+		list.add(new TestVo("김영희",19));
+		
+		/* 문제
+		 	- 서버에서 보낸 학생들 정보가 들어있는 list를 이용하여 학생들 이름과 나이를 출력하는 코드를 test1.jsp에 출력하는 코드 작성
+		*/
+		mv.addObject("list", list);
+		mv.setViewName("/main/test1");	 
+		return mv;
+	}
+	
+	/* 화면에서 서버로 데이터 전송1 */
+	@RequestMapping(value = "/test2", method = RequestMethod.GET)
+	public ModelAndView test2Get(Locale locale, ModelAndView mv, String name) {
+		System.out.println(name);
+		mv.setViewName("/main/test2");	 
+		return mv;
+	}
+	/* 화면에서 서버로 데이터 전송2 */
+	@RequestMapping(value = "/test3", method = RequestMethod.GET)
+	public ModelAndView test3Get(Locale locale, ModelAndView mv, TestVo testVo) {
+		System.out.println("/test3 - 정보 : " + testVo);
+		
+		mv.setViewName("/main/test2");	 
+		return mv;
+	}
+	/* 화면에서 서버로 데이터 전송3 */
+	@RequestMapping(value = "/test4", method = RequestMethod.GET)
+	public ModelAndView test4Get(Locale locale, ModelAndView mv, String[] name) {
+		for(String tmp : name) {
+			System.out.println("/test4 - 정보 : " + tmp);
+		}
+		mv.setViewName("/main/test2");	 
+		return mv;
+	}
+	/* 화면에서 서버로 데이터 전송4 */
+	@RequestMapping(value = "/test5", method = RequestMethod.GET)
+	public ModelAndView test5Get(Locale locale, ModelAndView mv, String name) {
+		System.out.println("/test5 - 이름 : " + name);
+		String[] names = name.split(",");	// 구분자를 기준으로 나누어서 배열로 만듦
+		for(String tmp : names) {
+			System.out.println("이름 : " + tmp);
+		}
+		mv.setViewName("/main/test2");	 
 		return mv;
 	}
 	

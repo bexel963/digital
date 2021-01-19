@@ -63,6 +63,16 @@
 		update files set isDel='Y' where boardNum = #{num}
 	</update>
 	
+	<select id="getLike" resultType="kr.green.spring.vo.LikeVo">
+		select * from likes where boardNum = #{like.boardNum} and id = #{like.id}
+	</select>
+	<insert id="insertLike">
+		insert into likes(boardNum, id, up) values(#{like.boardNum}, #{like.id}, #{like.up})
+	</insert>
+	<update id="updateLike">
+		update likes set up = #{like.up} where id = #{like.id} and boardNum = #{like.boardNum}
+	</update>
+	
 </mapper>
 
 

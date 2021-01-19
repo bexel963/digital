@@ -3,18 +3,68 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.green.test.dao.BoardDao">
+
 	<select id="getBoardList" resultType="kr.green.test.vo.BoardVo">	<!-- id는 BoardDao의 메소드명과 맞춘다. --><!-- resultType은 한행을 담을 수 있는거로 정한다. -->
-		select * from board	where isDel = 'N'											
+		select * from board	where isDel = 'N'
+		<if test="cri.type == 1">
+			and (title like concat('%', #{cri.search}, '%') or content like concat('%', #{cri.search}, '%') or writer like concat('%', #{cri.search}, '%'))
+		</if>
+		<if test="cri.type == 2">
+			and title like concat('%', #{cri.search}, '%') <!-- '%' 사이의 문자가 들어가는 정보를 검색 -->
+		</if>
+		<if test="cri.type == 3">
+			and content like concat('%', #{cri.search}, '%')
+		</if>
+		<if test="cri.type == 4">
+			and writer like concat('%', #{cri.search}, '%')
+		</if>
+		order by num desc limit #{cri.pageStart}, #{cri.perPageNum} <!-- DB의 #{cri.pageStart}번지에서 #{cri.perPageNum}번지 까지의 정보를 가져온다. -->											
 	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		select count(*) from board where isDel ='N'
+		<if test="cri.type == 1">
+			and (title like concat('%', #{cri.search}, '%') or content like concat('%', #{cri.search}, '%') or writer like concat('%', #{cri.search}, '%'))
+		</if>
+		<if test="cri.type == 2">
+			and title like concat('%', #{cri.search}, '%')
+		</if>
+		<if test="cri.type == 3">
+			and content like concat('%', #{cri.search}, '%')
+		</if>
+		<if test="cri.type == 4">
+			and writer like concat('%', #{cri.search}, '%')
+		</if> 
+	</select>
+	
 	<select id="getBoard" resultType="kr.green.test.vo.BoardVo">
 		select * from board where num = #{num}
 	</select>
-	<insert id="insertBoard" parameterType="kr.green.test.vo.BoardVo">
+	
+	<select id="getFileList" resultType="kr.green.test.vo.FileVo"> <!-- resultType이 return타입임. -->
+		select * from files where boardNum = #{num} and isDel ='N'
+	</select>
+	
+	<insert id="insertBoard" useGeneratedKeys="true" keyProperty="board.num" parameterType="kr.green.test.vo.BoardVo"> <!-- useGeneratedKeys, keyProperty는 insert문으로 정보 넣을떄 기본키 가져오게하는거  -->
 		insert into board(title, writer, content) values(#{board.title}, #{board.writer}, #{board.content})
 	</insert>
+	
+	<insert id="registerFile">
+		insert into files(boardNum, oriFilename, filename) values(#{num}, #{originalFilename}, #{fileName})
+	</insert>
+	
 	<update id="updateBoard" parameterType="kr.green.test.vo.BoardVo">
 		update board set title = #{board.title}, content = #{board.content}, isDel = #{board.isDel} where num = #{board.num}
 	</update>
+	
+	<update id="updateView" parameterType="kr.green.test.vo.BoardVo">
+		update board set views = views + 1 where num = #{num} and isDel = 'N'
+	</update>
+	
+	<update id="deleteFile">
+		update files set isDel = 'Y' where boardNum = #{num}
+	</update>
+	
 </mapper>
 
 

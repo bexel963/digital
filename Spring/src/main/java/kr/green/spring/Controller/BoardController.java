@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,6 +29,7 @@ import kr.green.spring.service.UserService;
 import kr.green.spring.utils.UploadFileUtils;
 import kr.green.spring.vo.BoardVo;
 import kr.green.spring.vo.FileVo;
+import kr.green.spring.vo.LikeVo;
 import kr.green.spring.vo.UserVo;
 
 @Controller
@@ -58,12 +61,17 @@ public class BoardController {
 	
 	/* 게시글 상세 */
 	@RequestMapping(value = "/board/detail", method = RequestMethod.GET)		
-	public ModelAndView boardDetailGet(ModelAndView mv, Integer num, Criteria cri) {
+	public ModelAndView boardDetailGet(ModelAndView mv, Integer num, Criteria cri, HttpServletRequest request) {
 		System.out.println("화면에서 받은 번호 : " + num);
 		boardService.view(num);		//해당 게시글의 조회수를 증가
 		BoardVo board = boardService.getBoard(num);
 		System.out.println("검색된 게시글 :" + board);
 		ArrayList<FileVo> fList = boardService.getFileList(num);
+		
+		UserVo user = userService.getUser(request);
+		LikeVo like = boardService.getLike(num, user);
+		
+		mv.addObject("like",like);
 		mv.addObject("fList", fList);
 		mv.addObject("board", board);
 		mv.addObject("cri", cri);
@@ -157,9 +165,21 @@ public class BoardController {
 	        e.printStackTrace();
 	        entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
 	    }finally {
+	    	
 	        in.close();
 	    }
 	    return entity;	// 해당 화면에서는 entity를 받아서 다운로드
+	}
+	
+	/* like기능 */
+	@RequestMapping(value = "/board/like", method = RequestMethod.POST)		
+	@ResponseBody
+	// 리턴타입을 Object로 하면 아무거다 다 리턴 할수있다.
+	public Object authorModifyPost(@RequestBody LikeVo likeVo) {
+		System.out.println("/board/like : " + likeVo);
+		boardService.like(likeVo);
+		HashMap<String, Object> map = new HashMap<String, Object>();	// json형태로 보내준다는 말은 map으로 보내주는거다.
+		return map;
 	}
 	
 }

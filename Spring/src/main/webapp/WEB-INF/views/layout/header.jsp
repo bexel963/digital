@@ -24,7 +24,12 @@
 			      	<li class="nav-item">
 			        	<a class="nav-link" href="<%=request.getContextPath()%>/signout">로그아웃</a>
 			      	</li> 
-		      	</c:if>   
+		      	</c:if>
+		      	<c:if test="${user != null && user.author >= 9}">
+			      	<li class="nav-item">
+				        	<a class="nav-link" href="<%=request.getContextPath()%>/user/list2">회원관리</a>
+				    </li>
+			    </c:if>    
 	    	</ul>
 		</div> 
 	</div> 

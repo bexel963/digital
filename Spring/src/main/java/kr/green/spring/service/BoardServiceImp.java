@@ -11,6 +11,7 @@ import kr.green.spring.dao.BoardDao;
 import kr.green.spring.pagination.Criteria;
 import kr.green.spring.vo.BoardVo;
 import kr.green.spring.vo.FileVo;
+import kr.green.spring.vo.LikeVo;
 import kr.green.spring.vo.UserVo;
 
 @Service
@@ -92,6 +93,24 @@ public class BoardServiceImp implements BoardService {
 			return null;
 		}
 		return boardDao.getFileList(num);
+	}
+
+	@Override
+	public void like(LikeVo likeVo) {
+		LikeVo tmp = boardDao.getLike(likeVo);
+		if(tmp == null) {
+			boardDao.insertLike(likeVo);
+		}else {
+			boardDao.updateLike(likeVo);
+		}
+	}
+
+	@Override
+	public LikeVo getLike(Integer num, UserVo user) {
+		if(user == null || num == null)
+			return null;
+		LikeVo tmp = new LikeVo(num, user.getId());
+		return boardDao.getLike(tmp);
 	}
 
 }

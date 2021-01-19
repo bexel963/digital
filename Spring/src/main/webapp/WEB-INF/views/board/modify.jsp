@@ -32,7 +32,7 @@
 	      <label>내용</label>
 	      <textarea rows="10" class="form-control" name="content"></textarea>	<!-- 쌍태그는 값을 value 말고 쌍태그 사이에 넣는다. -->
 	    </div>
-	     <div class="form-group">
+	    <div class="form-group">
 	        <label>파일</label>
 	        <input type="file" class="form-control" name="fileList"/>
     	</div>

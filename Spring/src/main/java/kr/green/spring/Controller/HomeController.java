@@ -1,7 +1,7 @@
 package kr.green.spring.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,12 +10,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.spring.service.UserService;
+import kr.green.spring.vo.TestVo;
 import kr.green.spring.vo.UserVo;
 
 /**
@@ -93,6 +95,58 @@ public class HomeController {
 		request.getSession().removeAttribute("user");
 		mv.setViewName("redirect:/");	 
 		return mv;
+	}
+	
+	@RequestMapping(value = "/user/list2", method = RequestMethod.GET)
+	public ModelAndView userListGet(ModelAndView mv) {
+		ArrayList<UserVo> list = new ArrayList<UserVo>();
+		//모든 회원 정보를 가져오는 코드
+		list = userService.getAllUser();
+		mv.addObject("list",list);
+		mv.setViewName("/board/list2");
+		return mv;
+	}
+	/* ajax 예제1 */
+	@RequestMapping(value = "/ajax1", method = RequestMethod.POST)		//url이 localhost:8080/spring 가 기본 입력 되어있음
+	@ResponseBody
+	public String ajax1Post(TestVo testVo) {
+		System.out.println("ajax 테스트 성공!");
+		System.out.println(testVo);
+		return testVo.toString();
+	}
+	
+	@RequestMapping(value = "/dup", method = RequestMethod.POST)		//url이 localhost:8080/spring 가 기본 입력 되어있음
+	@ResponseBody
+	public String dupPost(String id) {
+		UserVo user = userService.getUser(id);
+		if(user == null)
+			return "not user";
+		return "user";
+	}
+	
+	/* ajax 예제2 */
+	@RequestMapping(value = "/ajax2", method = RequestMethod.POST)		//url이 localhost:8080/spring 가 기본 입력 되어있음
+	@ResponseBody
+	// 리턴타입을 Object로 하면 아무거다 다 리턴 할수있다.
+	public Object ajax2Post(@RequestBody TestVo testVo) {	// json형태로 받으려면 @RequestBody 추가해야됨
+		HashMap<String, Object> map = new HashMap<String,Object>(); // key에 해당하는 이름이 중복되지않게 데이터를 보낼수있다.
+		ArrayList<UserVo> list = userService.getAllUser();
+		// map에 데이터 여러개 추가해서 한꺼번에 보낼 수 있다.
+		map.put("list", list);
+		map.put("testVo", testVo);
+		return map;	// json 사용하려면 map을 이용해서 서버에서 화면이로 데이터를 보내야한다.
+	}
+	
+	/* list2 내용 수정 */
+	@RequestMapping(value = "/author/modify", method = RequestMethod.POST)		//url이 localhost:8080/spring 가 기본 입력 되어있음
+	@ResponseBody
+	// 리턴타입을 Object로 하면 아무거다 다 리턴 할수있다.
+	public Object authorModifyPost(@RequestBody UserVo userVo) {	
+		userService.updateAuthor(userVo);
+		// json형태로 보내주는거는 map으로 보내주는거다.
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		return map;
 	}
 
 }

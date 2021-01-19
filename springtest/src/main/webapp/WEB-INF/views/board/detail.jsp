@@ -28,14 +28,28 @@
 	      <input type="text" class="form-control" id="registerDate" name="registerDate" readonly value="${board.registerDate}">
 	    </div>
 	    <div class="form-group">
+	      <label for="views">조회수</label>
+	      <input type="text" class="form-control" id="registerDate" name="views" readonly value="${board.views}">
+	    </div>
+	    <div class="form-group">
 	      <label for="content">내용</label>
 	      <textarea class="form-control" id="content" name="content" readonly >${board.content}</textarea>
 	    </div>
+	    <c:if test="${fileList.size() != 0}">
+	      <c:forEach items="${fileList}" var="file">
+		    <div class="form-group">
+		      <label for="content">첨부파일</label>
+		      	<div>
+		      		<a href="<%=request.getContextPath()%>/board/download?filename=${file.filename}">${file.oriFilename}</a>
+		      	</div> 
+		    </div>
+		  </c:forEach>
+	    </c:if>
 		</c:if>
 		<c:if test="${board == null}">
 			<h1>존재하지 않은 게시물입니다.</h1>
 		</c:if>	 
-		<a href="<%=request.getContextPath()%>/board/list">
+		<a href="<%=request.getContextPath()%>/board/list?page=${cri.page}&type=${cri.type}&search=${cri.search}">
 			<button type="button" class="btn btn-outline-info">목록</button>
 		</a>
 		<a href="<%=request.getContextPath()%>/board/register">
@@ -50,5 +64,6 @@
 		</a>
 		</c:if>
 	</div>
+	
 </body>
 </html>

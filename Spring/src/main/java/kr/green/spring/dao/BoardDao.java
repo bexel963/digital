@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import kr.green.spring.pagination.Criteria;
 import kr.green.spring.vo.BoardVo;
 import kr.green.spring.vo.FileVo;
+import kr.green.spring.vo.LikeVo;
 
 public interface BoardDao {
 
@@ -27,5 +28,11 @@ public interface BoardDao {
 	ArrayList<FileVo> getFileList(@Param("num")int num);
 
 	void deleteFile(@Param("num")int num);
+
+	LikeVo getLike(@Param("like")LikeVo likeVo);
+
+	void insertLike(@Param("like")LikeVo likeVo);
+
+	void updateLike(@Param("like")LikeVo likeVo);
 
 }

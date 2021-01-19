@@ -13,6 +13,7 @@
 	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<!-- webapp폴더안에 resources폴더로 경로 잡고 jsp 연동 가능하게하는 코드 -->
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- 컨트롤러에서 URL 주소 설정 -->

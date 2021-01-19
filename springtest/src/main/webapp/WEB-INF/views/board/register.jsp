@@ -10,7 +10,7 @@
 <body>
 	<div class="container">
 	  <h2>게시글 등록</h2>
-	  <form action="<%=request.getContextPath()%>/board/register" method="post">	<!-- 게시글은 보안이 중요하지 않지만 내용이 길어서 POST로 한다. -->
+	  <form action="<%=request.getContextPath()%>/board/register" method="post" enctype="multipart/form-data">	<!-- 게시글은 보안이 중요하지 않지만 내용이 길어서 POST로 한다. -->
 	    <div class="form-group">
 	      <label for="title">제목</label>
 	      <input type="text" class="form-control" id="title" name="title">
@@ -23,6 +23,18 @@
 	      <label for="content">내용</label>
 	      <textarea class="form-control" id="content" name="content"></textarea>
 	    </div>
+	    <div class="form-group">
+	        <label>파일1</label>
+	        <input type="file" class="form-control" name="fileList"/> <!-- BoardController의 매개변수 이름과 intput속성의 name 같아야한다. -->
+    	</div>
+    	<div class="form-group">
+	        <label>파일2</label>
+	        <input type="file" class="form-control" name="fileList"/> <!-- BoardController의 매개변수 이름과 intput속성의 name 같아야한다. -->
+    	</div>
+    	<div class="form-group">
+	        <label>파일3</label>
+	        <input type="file" class="form-control" name="fileList"/> <!-- BoardController의 매개변수 이름과 intput속성의 name 같아야한다. -->
+    	</div>
 	    <button type="submit" class="btn btn-outline-info">등록</button>
 	  </form>
 	  <a href="<%=request.getContextPath()%>/board/list">

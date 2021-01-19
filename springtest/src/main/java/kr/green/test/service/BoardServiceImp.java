@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.green.test.dao.BoardDao;
+import kr.green.test.pagination.Criteria;
 import kr.green.test.vo.BoardVo;
+import kr.green.test.vo.FileVo;
 import kr.green.test.vo.Uservo;
 
 @Service
@@ -16,10 +18,9 @@ public class BoardServiceImp implements BoardService {
 	BoardDao boardDao;
 
 	@Override
-	public ArrayList<BoardVo> getBoardList() {
-		//ArrayList<BoardVo> list = boardDao.getBoardList();
-		//return list;
-		return boardDao.getBoardList();
+	public ArrayList<BoardVo> getBoardList(Criteria cri) {
+		ArrayList<BoardVo> list = boardDao.getBoardList(cri);
+		return list;
 	}
 
 	@Override
@@ -57,12 +58,35 @@ public class BoardServiceImp implements BoardService {
 		board.setIsDel("Y");
 		boardDao.updateBoard(board);
 	}
+
+	@Override
+	public void updateView(Integer num) {
+		if(num == null) {
+			return;
+		}
+		boardDao.updateView(num);
+	}
+
+	@Override
+	public int getTotalCount(Criteria cri) {
+		return boardDao.getTotalCount(cri);
+	}
+
+	@Override
+	public void registerFile(int num, String originalFilename, String fileName) {
+		boardDao.registerFile(num, originalFilename, fileName);
+		
+	}
+
+	@Override
+	public ArrayList<FileVo> getFileList(Integer num) {
+		return boardDao.getFileList(num);
+	}
+
 	
-	
-	
-	
-	
-	
-	
-	
+	@Override
+	public void deleteFile(int num) {
+		boardDao.deleteFile(num);
+	}
+
 }

@@ -7,7 +7,14 @@ public class UserVo {
 	private int age;
 	private String email;
 	private String home;
+	private int author;
 	
+	public int getAuthor() {
+		return author;
+	}
+	public void setAuthor(int author) {
+		this.author = author;
+	}
 	public String getId() {
 		return id;
 	}
@@ -46,9 +53,8 @@ public class UserVo {
 	}
 	@Override
 	public String toString() {
-		return "Uservo [id=" + id + ", pw=" + pw + ", name=" + name + ", age=" + age + ", email=" + email + ", home="
-				+ home + "]";
+		return "UserVo [id=" + id + ", pw=" + pw + ", name=" + name + ", age=" + age + ", email=" + email + ", home="
+				+ home + ", author=" + author + "]";
 	}
-	
-	
+
 }
