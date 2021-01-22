@@ -18,5 +18,7 @@ public interface UserDao {
 
 	public void updateAuthor(@Param("user")UserVo userVo);
 
+	public void updateUser(@Param("user")UserVo user);
+
 
 }

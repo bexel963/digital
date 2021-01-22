@@ -15,6 +15,18 @@
   	insert into spring.user(id,pw,name,age,home,email)
   		values(#{user.id},#{user.pw},#{user.name},#{user.age},#{user.home},#{user.email})
   </insert>
+  
+  <select id="getAllUser" resultType="kr.green.test.vo.Uservo">
+  	select * from spring.user
+  </select>
+  
+  <update id="updateAuthor">
+  	update user set author = #{user.author} where id = #{user.id}
+  </update>
+  
+  <update id="updateUser">
+  	update user set pw = #{user.pw} where id = #{user.id}
+  </update>
 </mapper>
 
 

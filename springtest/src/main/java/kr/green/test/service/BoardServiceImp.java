@@ -9,6 +9,7 @@ import kr.green.test.dao.BoardDao;
 import kr.green.test.pagination.Criteria;
 import kr.green.test.vo.BoardVo;
 import kr.green.test.vo.FileVo;
+import kr.green.test.vo.LikeVo;
 import kr.green.test.vo.Uservo;
 
 @Service
@@ -87,6 +88,27 @@ public class BoardServiceImp implements BoardService {
 	@Override
 	public void deleteFile(int num) {
 		boardDao.deleteFile(num);
+	}
+
+	@Override
+	public void like(LikeVo likeVo) {
+		LikeVo tmp = boardDao.getLike(likeVo);
+		System.out.println("테이블에서 가져온 LikeVo 정보 : " + tmp);
+		if(tmp==null) {
+			boardDao.insertLike(likeVo);
+		}else {
+			boardDao.updateLike(likeVo);
+		}
+		
+	}
+
+	@Override
+	public LikeVo getLike(Integer num, Uservo user) {
+		if(user == null) {
+			return null;
+		}
+		LikeVo tmp = new LikeVo(num, user.getId());
+		return boardDao.getLike(tmp);
 	}
 
 }

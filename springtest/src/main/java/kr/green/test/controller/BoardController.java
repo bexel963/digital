@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,6 +29,7 @@ import kr.green.test.service.UserService;
 import kr.green.test.utils.UploadFileUtils;
 import kr.green.test.vo.BoardVo;
 import kr.green.test.vo.FileVo;
+import kr.green.test.vo.LikeVo;
 import kr.green.test.vo.Uservo;
 
 @Controller	// 컨트롤러가 url패턴 분석할때 @Controller를 먼저 모으고 @RequestMapping의 value를 확인한 후 해당 url을 처리한다.
@@ -53,21 +56,32 @@ public class BoardController {
 		mv.setViewName("/board/list");	
 		return mv;
 	}
+	
 	/* 게시글 상세 */
 	@RequestMapping(value = "/board/detail", method = RequestMethod.GET)		
-	public ModelAndView boardDetailGet(ModelAndView mv, Integer num, Criteria cri) {
+	public ModelAndView boardDetailGet(ModelAndView mv, Integer num, Criteria cri, HttpServletRequest request) {
 		boardService.updateView(num);
 		BoardVo board = boardService.getBoard(num);
+		
+		Uservo user = userService.getUser(request);
+		System.out.println("선택한 게시글 번호 : " + num);
+		System.out.println("세션에서 가져온 유저정보 : " + user);
+		
+		LikeVo like = boardService.getLike(num, user);
+		System.out.println("DB에서 가져온 추천정보 : " + like);
+		
 		ArrayList<FileVo> fileList = boardService.getFileList(num);
 		System.out.println(board);
 		System.out.println(fileList);
 		
+		mv.addObject("like", like);
 		mv.addObject("fileList",fileList);
 		mv.addObject("cri",cri);
 		mv.addObject("board",board);		// 서버에서 화면으로 데이터 전송 / 화면은 jsp / detail.jsp에서 board 사용 -> 화면에 출력됨
 		mv.setViewName("/board/detail");	// detail이라는 jsp를 화면에 보여준다.
 		return mv;
 	}
+	
 	/* 게시글 등록 GET */
 	@RequestMapping(value = "/board/register", method = RequestMethod.GET)		
 	public ModelAndView boardRegisterGet(ModelAndView mv) {
@@ -95,6 +109,7 @@ public class BoardController {
 		mv.setViewName("redirect:/board/list");	
 		return mv;
 	}
+	
 	/* 게시글 수정 GET */
 	@RequestMapping(value = "/board/modify", method = RequestMethod.GET)		
 	public ModelAndView boardModifyGet(ModelAndView mv, Integer num) {
@@ -126,6 +141,7 @@ public class BoardController {
 		mv.setViewName("redirect:/board/list");	
 		return mv;
 	}
+	
 	/* 게시글 삭제 GET */
 	@RequestMapping(value = "/board/delete", method = RequestMethod.GET)		
 	public ModelAndView boarddeleteGet(ModelAndView mv, Integer num, HttpServletRequest request) {
@@ -156,6 +172,16 @@ public class BoardController {
 	        in.close();
 	    }
 	    return entity;
+	}
+	
+	/* 추천/비추천 */
+	@RequestMapping(value = "/board/like", method = RequestMethod.POST)
+	@ResponseBody
+	public Object boardLikeGet(@RequestBody LikeVo likeVo) {	// LikeVo likeVo - 기본 생성자가 호출되어 이렇게 객체 만듦
+		System.out.println("넘어온 LikeVo정보 : " + likeVo);
+		boardService.like(likeVo);
+		HashMap<String, Object> map = new HashMap<String, Object>();	
+		return map;
 	}
 }
 

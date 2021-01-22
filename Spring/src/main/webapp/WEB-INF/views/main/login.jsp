@@ -21,11 +21,33 @@
 		    <button type="submit" class="btn btn-primary col-12">로그인</button>
 		</form>
 	</c:if>
+	<a href="#" class="find-pw">비밀번호 찾기</a>
+	
+	<script>
+		$(function(){
+			$('.find-pw').click(function(){
+				var id = prompt('아이디를 입력하세요');
+				var data = {'id' : id};	// 객체
+				$.ajax({
+					url : '<%=request.getContextPath()%>/find/pw',
+					type : 'post',
+					data : data,	// data를 HomeController의 해당 매개변수로 보냄
+					success : function(data){	// 메소드 ajax1Post의 반환값을 서버로부터 받아서 실행
+						if(data == "fail"){
+							alert('존재하지 않은 아이디입니다.');
+						}else
+							alert('비밀번호를 등록한 메일로 전송했습니다.');
+					}
+				})
+			})
+		})
+	</script>
 	
 	<c:if test="${user != null}">
 		<br>
 		<button id="btnAjax1">ajax버튼1</button>
 		<button id="btnAjax2">ajax버튼2</button>
+		
 	
 		<div>
 			<table class="table table-dark table-hover">

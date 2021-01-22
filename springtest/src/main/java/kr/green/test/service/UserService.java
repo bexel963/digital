@@ -1,5 +1,7 @@
 package kr.green.test.service;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import kr.green.test.vo.Uservo;
@@ -15,4 +17,10 @@ public interface UserService {
 	boolean signup(Uservo user);
 	
 	Uservo getUser(HttpServletRequest request);
+
+	ArrayList<Uservo> getAllUser();
+
+	void updateAuthor(Uservo userVo);
+
+	void updateUser(Uservo getUser);
 }

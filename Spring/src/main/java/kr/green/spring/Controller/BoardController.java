@@ -71,6 +71,7 @@ public class BoardController {
 		UserVo user = userService.getUser(request);
 		LikeVo like = boardService.getLike(num, user);
 		
+		
 		mv.addObject("like",like);
 		mv.addObject("fList", fList);
 		mv.addObject("board", board);

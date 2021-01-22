@@ -2,9 +2,12 @@ package kr.green.spring.service;
 
 import java.util.ArrayList;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +21,9 @@ public class UserServiceImp implements UserService{
 	private UserDao userDao;
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
-
+	@Autowired
+	private JavaMailSender mailSender;
+	
 	@Override
 	public String getEmail(String id) {
 		UserVo user = userDao.getUser(id);
@@ -79,6 +84,34 @@ public class UserServiceImp implements UserService{
 	@Override
 	public void updateAuthor(UserVo userVo) {
 		userDao.updateAuthor(userVo);
+	}
+
+	@Override
+	public void updateUser(UserVo user) {
+		if(user == null) {
+			return;
+		}
+		String encodePw = passwordEncoder.encode(user.getPw());
+		user.setPw(encodePw);
+		userDao.updateUser(user);
+	}
+
+	@Override
+	public void sendMail(String title, String content, String email) {
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+	        MimeMessageHelper messageHelper 
+	            = new MimeMessageHelper(message, true, "UTF-8");
+
+	        messageHelper.setFrom("test@naver.com");  // 딱히 의미는 없지만 보내는사람 생략하거나 하면 정상작동을 안함
+	        messageHelper.setTo(email);     // 받는사람 이메일
+	        messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+	        messageHelper.setText(content);  // 메일 내용
+
+	        mailSender.send(message);
+	    } catch(Exception e){
+	        System.out.println(e);
+	    }
 	}
 	
 }

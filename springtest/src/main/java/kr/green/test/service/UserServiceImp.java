@@ -1,5 +1,7 @@
 package kr.green.test.service;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +70,23 @@ public class UserServiceImp implements UserService{
 	public Uservo getUser(HttpServletRequest request) {
 		Uservo user = (Uservo)request.getSession().getAttribute("user");	// 세션정보를 가져오고 가져온 정보중에 user라는 이름으로 등록된 속성이 있으면 가져오고 Uservo로 형변환
 		return user;
+	}
+
+	@Override
+	public ArrayList<Uservo> getAllUser() {
+		return userDao.getAllUser();
+	}
+
+	@Override
+	public void updateAuthor(Uservo userVo) {
+		userDao.updateAuthor(userVo);
+		
+	}
+
+	@Override
+	public void updateUser(Uservo getUser) {
+		userDao.updateUser(getUser);
+		
 	}
 	
 }

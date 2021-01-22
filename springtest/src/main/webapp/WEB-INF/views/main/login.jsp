@@ -21,5 +21,32 @@
 		    <button type="submit" class="btn btn-primary col-12">로그인</button>
 		</form>
 	</c:if>
+	<a href="#" class="find-pw">비밀번호 찾기</a>
+	<script>
+		$('.find-pw').click(function(e){
+			e.preventDefault();
+			var id = prompt('아이디를 입력하세요');
+			var sendData = {'id' : id};
+			$.ajax({
+				url : '<%=request.getContextPath()%>/find/pw',
+				type : 'post',
+				data : JSON.stringify(sendData),
+				dataType : "json",
+				contentType : "application/json; charset=UTF-8",
+				success : function(data){
+					console.log(data.result);
+					if( data.result == "fail" ){
+						alert('존재하지 않는 아이디');
+					}else if( data.result == "success"){
+						alert('비밀번호를 등록한 메일로 전송했습니다.');
+					}
+				
+				},
+				error : function(){
+					console.log('추천/비추천 과정에 문제가 있습니다.');
+				}
+			})
+		})
+	</script>
 </body>
 </html>

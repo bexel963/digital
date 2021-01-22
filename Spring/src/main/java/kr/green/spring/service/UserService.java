@@ -15,5 +15,7 @@ public interface UserService {
 	UserVo getUser(HttpServletRequest request); // HttpServletRequest가 주어지면 회원 정보를 가져오는 메소드 ( 메소드 오버로딩 )
 	ArrayList<UserVo> getAllUser();
 	void updateAuthor(UserVo userVo);
+	void updateUser(UserVo user);
+	void sendMail(String title, String content, String email);
 	
 }

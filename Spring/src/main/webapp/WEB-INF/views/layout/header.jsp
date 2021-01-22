@@ -27,7 +27,7 @@
 		      	</c:if>
 		      	<c:if test="${user != null && user.author >= 9}">
 			      	<li class="nav-item">
-				        	<a class="nav-link" href="<%=request.getContextPath()%>/user/list2">회원관리</a>
+				        	<a class="nav-link" href="<%=request.getContextPath()%>/list2">회원관리</a>
 				    </li>
 			    </c:if>    
 	    	</ul>

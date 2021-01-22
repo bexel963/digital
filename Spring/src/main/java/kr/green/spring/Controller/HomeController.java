@@ -64,7 +64,22 @@ public class HomeController {
 		}
 		return mv;
 	}
-	
+	/* 비밀번호 찾기(메일) */
+	@RequestMapping(value = "/find/pw", method = RequestMethod.POST)		//url이 localhost:8080/spring 가 기본 입력 되어있음
+	@ResponseBody
+	public String findPwPost(String id) {
+		UserVo user = userService.getUser(id);
+		if(user == null) {
+			return "fail";
+		}
+		String pw = "1234";
+		user.setPw(pw);
+		userService.updateUser(user);
+		String title = "비밀번호 변경 메일입니다.";
+		String content = "새 비밀번호 : + pw";
+		userService.sendMail(title,content,user.getEmail());
+		return "success";
+	}
 	/* 회원가입 */
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public ModelAndView signupGet(Locale locale, ModelAndView mv) {
@@ -87,6 +102,15 @@ public class HomeController {
 		}
 		return mv;
 	}
+	/* 아이디 중복검사 */
+	@RequestMapping(value = "/dup", method = RequestMethod.POST)		//url이 localhost:8080/spring 가 기본 입력 되어있음
+	@ResponseBody
+	public String dupPost(String id) {
+		UserVo user = userService.getUser(id);
+		if(user == null)
+			return "not user";
+		return "user";
+	}
 	
 	/* 로그아웃 */
 	@RequestMapping(value = "/signout", method = RequestMethod.GET)
@@ -96,8 +120,8 @@ public class HomeController {
 		mv.setViewName("redirect:/");	 
 		return mv;
 	}
-	
-	@RequestMapping(value = "/user/list2", method = RequestMethod.GET)
+	/* list2 - 회원정보 리스트 */
+	@RequestMapping(value = "/list2", method = RequestMethod.GET)
 	public ModelAndView userListGet(ModelAndView mv) {
 		ArrayList<UserVo> list = new ArrayList<UserVo>();
 		//모든 회원 정보를 가져오는 코드
@@ -106,6 +130,18 @@ public class HomeController {
 		mv.setViewName("/board/list2");
 		return mv;
 	}
+	/* list2 내용 수정 - 회원정보 리스트 수정 */
+	@RequestMapping(value = "/author/modify", method = RequestMethod.POST)		//url이 localhost:8080/spring 가 기본 입력 되어있음
+	@ResponseBody
+	// 리턴타입을 Object로 하면 아무거다 다 리턴 할수있다.
+	public Object authorModifyPost(@RequestBody UserVo userVo) {	
+		userService.updateAuthor(userVo);
+		// json형태로 보내주는거는 map으로 보내주는거다.
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		return map;
+	}
+	
 	/* ajax 예제1 */
 	@RequestMapping(value = "/ajax1", method = RequestMethod.POST)		//url이 localhost:8080/spring 가 기본 입력 되어있음
 	@ResponseBody
@@ -113,15 +149,6 @@ public class HomeController {
 		System.out.println("ajax 테스트 성공!");
 		System.out.println(testVo);
 		return testVo.toString();
-	}
-	
-	@RequestMapping(value = "/dup", method = RequestMethod.POST)		//url이 localhost:8080/spring 가 기본 입력 되어있음
-	@ResponseBody
-	public String dupPost(String id) {
-		UserVo user = userService.getUser(id);
-		if(user == null)
-			return "not user";
-		return "user";
 	}
 	
 	/* ajax 예제2 */
@@ -137,16 +164,6 @@ public class HomeController {
 		return map;	// json 사용하려면 map을 이용해서 서버에서 화면이로 데이터를 보내야한다.
 	}
 	
-	/* list2 내용 수정 */
-	@RequestMapping(value = "/author/modify", method = RequestMethod.POST)		//url이 localhost:8080/spring 가 기본 입력 되어있음
-	@ResponseBody
-	// 리턴타입을 Object로 하면 아무거다 다 리턴 할수있다.
-	public Object authorModifyPost(@RequestBody UserVo userVo) {	
-		userService.updateAuthor(userVo);
-		// json형태로 보내주는거는 map으로 보내주는거다.
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		return map;
-	}
+	
 
 }

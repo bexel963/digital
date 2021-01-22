@@ -24,7 +24,12 @@
 		      	</c:if>
 		      	<li class="nav-item">
 			    	<a class="nav-link" href="<%=request.getContextPath()%>/board/list">게시판</a>
-			    </li>    
+			    </li>
+			    <c:if test="${user != null && user.author >= 9}">
+			      	<li class="nav-item">
+				        	<a class="nav-link" href="<%=request.getContextPath()%>/list2">회원관리</a>
+				    </li>
+			    </c:if>        
 	    	</ul>
 		</div> 
 	</div> 
