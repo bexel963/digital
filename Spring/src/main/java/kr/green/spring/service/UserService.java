@@ -17,5 +17,6 @@ public interface UserService {
 	void updateAuthor(UserVo userVo);
 	void updateUser(UserVo user);
 	void sendMail(String title, String content, String email);
+	String getNewPassword(int size);
 	
 }

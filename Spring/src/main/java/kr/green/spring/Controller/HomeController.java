@@ -1,10 +1,12 @@
 package kr.green.spring.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +16,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.spring.service.UserService;
+import kr.green.spring.utils.UploadFileUtils;
+import kr.green.spring.vo.BoardVo;
+import kr.green.spring.vo.FileVo;
 import kr.green.spring.vo.TestVo;
 import kr.green.spring.vo.UserVo;
 
@@ -72,12 +78,13 @@ public class HomeController {
 		if(user == null) {
 			return "fail";
 		}
-		String pw = "1234";
+		String pw = userService.getNewPassword(8);
 		user.setPw(pw);
 		userService.updateUser(user);
 		String title = "비밀번호 변경 메일입니다.";
-		String content = "새 비밀번호 : + pw";
-		userService.sendMail(title,content,user.getEmail());
+		String content = "새 비밀번호 : " + pw;
+		//userService.sendMail(title,content,user.getEmail());  메일전송
+		System.out.println(content);
 		return "success";
 	}
 	/* 회원가입 */
@@ -141,6 +148,42 @@ public class HomeController {
 		
 		return map;
 	}
+	
+	/* 회원정보 수정 - GET */
+	@RequestMapping(value = "/user/modify", method = RequestMethod.GET)		
+	public ModelAndView userModifyGet(ModelAndView mv) {
+	
+		mv.setViewName("/main/modify");
+		return mv;
+	}
+	/* 회원정보 수정 - POST */
+	@RequestMapping(value = "/user/modify", method = RequestMethod.POST)		
+	public ModelAndView userModifyPost(ModelAndView mv, UserVo getUser, HttpServletRequest request) {	// request안에 세션 정보가 있음.
+
+		System.out.println(getUser);
+		userService.updateUser(getUser);
+		request.getSession().setAttribute("user", getUser);	// 세션에 있는 user정보 수정
+      	
+		mv.setViewName("redirect:/");		// main페이지로 이동
+		return mv;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/* ajax 예제1 */
 	@RequestMapping(value = "/ajax1", method = RequestMethod.POST)		//url이 localhost:8080/spring 가 기본 입력 되어있음

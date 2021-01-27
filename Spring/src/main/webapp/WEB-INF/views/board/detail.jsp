@@ -38,7 +38,7 @@
 	    </div>
 	    <div class="form-group">
 	      <label>내용</label>
-	      <textarea rows="10" class="form-control" readonly>${board.content}</textarea>	<!-- 쌍태그는 값을 value 말고 쌍태그 사이에 넣는다. -->
+	      <div>${board.content}</div>	<!-- 쌍태그는 값을 value 말고 쌍태그 사이에 넣는다. -->
 	    </div>
 	    <c:if test="${fList.size() != 0}">
 		    <div class="form-group">
