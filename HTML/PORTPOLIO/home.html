@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="//code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://kit.fontawesome.com/022cf171a0.js" crossorigin="anonymous"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+        ul,ol{
+            list-style: none;
+        }
+        .header .search-box{
+            height: 40px;
+            width: 100%;
+            position: relative;
+            background-color: #404148;
+            display: none;
+        }
+        .header .search-box .container{
+            position:absolute;
+            width: 1170px;
+            height: 34px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px 13px 0px 5px;
+            box-sizing: border-box;
+        }
+        .header .search-box .container .left{
+            float: left;
+        }
+        .header .search-box .container .left input{
+            font-size: 15px;
+            border: none;
+            background-color: #404148;
+            color: white;
+            text-align: middle; 
+        }
+        .header .search-box .container .left input:focus{
+            outline: none;
+        }
+        .header .search-box .container .right{
+            float: right;
+            color: white;
+        }
+        .header .search-box .close-btn{
+            cursor: pointer;
+        }
+        .header .logbar{
+            height: 40px;
+            width: 100%;
+            position: relative;
+            background-color: black;
+        }
+        .header .logbar .container{
+            position:absolute;
+            width: 1170px;
+            height: 34px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .header .logbar .container .left{
+            height: 100%;
+            float: left;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
+            padding: 10px 12px 7px 0;
+            float: left;
+        }
+        .header .logbar .container .left .time{
+            float: right;
+            font-weight: bold;
+        }
+        .header .logbar .container .right{
+            height: 100%;
+            padding: 10px 12px;
+            float: right;
+        }
+        .header .logbar .container .right .login{
+            font-size: 12px;
+            color: #eee;
+            float: left;
+            margin-right: 10px;
+            letter-spacing: 1px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .header .logbar .container .right .search-btn{
+            float: left;
+            color: white;
+            cursor: pointer;
+        }
+        .header .navbar{
+            height: 94px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+        .header .navbar .container{
+            width: 1170px;
+            height: 100%;
+            box-sizing: border-box;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding-top: 15px;
+        }
+        .header .navbar .container .left{
+            float: left;
+            
+        }
+        .header .navbar .container .right{
+            float: right;
+        }
+        .header .navbar .container .right li{
+            float: left;
+            padding: 20px;
+            font-weight: bold;
+        }
+        .header .navbar .container .right li:hover{
+            color: red;
+        }
+        .rolling-box{
+            height: 410px;
+            width: 100%;
+            background-color: #e8e8e8;
+            box-sizing: border-box;
+            padding: 5px;
+            
+        }
+        .rolling-box .contents-box{
+            overflow: hidden;
+            position: relative;
+            width: 1890px;
+        }
+        .rolling-box .pointer-box{
+            float: left;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            font-size: 30px;
+            opacity: 0.4;
+            cursor: pointer;
+            /*display: none;*/
+        }
+        .rolling-box .fa-chevron-left{
+            margin-right: 220px;
+        }
+        .rolling-box .fa-chevron-right{
+            margin-left: 220px;
+        }
+        .rolling-box .product{
+            display: inline-block;
+            height: 400px;
+            width: 626px;
+            box-sizing: border-box;
+            margin: 0 4px 0 4px;
+        }
+        
+        .rolling-box .contents-box-view{
+            width: calc(1283px * 5);
+        }
+        .rolling-box .contents-box-view a{
+            float: left;
+        }
+        .body{
+            height: 10320px;
+            width: 100%;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="search-box">
+            <div class="container">
+                <div class="left">
+                    <input type="text" placeholder="search" size="105">
+                </div>
+                <div class="right">
+                    <div class="close-btn">
+                        <i class="far fa-times-circle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="logbar">
+            <div class="container">
+                <div class="left">
+                    <div>
+                        <img src="//file3.funshop.co.kr/funtenna/funshop_link@2x.png" alt="" height="17">
+                        <div class="time">JAN 28, 2021</div>
+                    </div>
+                </div>
+                <div class="right">
+                    <a href="#" class="login">LOGIN</a>
+                    <div class="search-btn"><i class="fas fa-search"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar">
+            <div class="container">
+                <div class="left">
+                    <a href="#"><img src="//file3.funshop.co.kr/funtenna/logo@2x.png" width="250" height="50"alt=""></a>
+                </div>
+                <div class="right">
+                    <ul>
+                        <a href="#"><li>HOME</li></a>
+                        <a href="#"><li>CATEGORY</li></a>
+                        <a href="#"><li>HOT 10</li></a>
+                        <a href="#"><li>MY BOX</li></a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="rolling-box">
+        <div class="contents-box">
+            <div class="contents-box-view">
+                <a href="#" class="product n1">  
+                    <img src="https://funshop.akamaized.net/abroad/035/17733/Kohler%20Stillness%202_0.jpg" height="400" width="100%" class="img" alt="">
+                </a>
+                <a href="#" class="product n2">
+                    <img src="https://funshop.akamaized.net/abroad/035/17738/Anycall%20Retro%20Case%202_1.jpg" height="400" width="100%" class="img" alt="">
+                </a>
+                <a href="#" class="product n3">
+                    <img src="https://funshop.akamaized.net/abroad/035/17714/Hasbro%20Star%20Wars%20Galaxy%20Edge%20Captain%20Cardinal%20Helmet%201_0.png" height="400" width="100%" class="img" alt="">
+                </a>
+                <a href="#" class="product n4">
+                    <img src="https://funshop.akamaized.net/abroad/035/17714/Hasbro%20Star%20Wars%20Galaxy%20Edge%20Captain%20Cardinal%20Helmet%201_0.png" height="400" width="100%" class="img" alt="">
+                </a>
+                <a href="#" class="product n5">
+                    <img src="https://funshop.akamaized.net/abroad/035/17714/Hasbro%20Star%20Wars%20Galaxy%20Edge%20Captain%20Cardinal%20Helmet%201_0.png" height="400" width="100%" class="img" alt="">
+                </a>
+                <a href="#" class="product n6">
+                    <img src="https://funshop.akamaized.net/abroad/035/17714/Hasbro%20Star%20Wars%20Galaxy%20Edge%20Captain%20Cardinal%20Helmet%201_0.png" height="400" width="100%" class="img" alt="">
+                </a>
+                <a href="#" class="product n7">
+                    <img src="https://funshop.akamaized.net/abroad/035/17714/Hasbro%20Star%20Wars%20Galaxy%20Edge%20Captain%20Cardinal%20Helmet%201_0.png" height="400" width="100%" class="img" alt="">
+                </a>
+            </div>
+            <div class="pointer-box">
+                <i class="fas fa-chevron-left"></i>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+    </div>
+    <div class="body"></div>
+    <div class="footer"></div>
+    
+    <script>
+        //$('.product').first().css('background-color', '') - DB에있는 사진 가져와서 넣는 코드
+        $('.header .logbar .search-btn').click(function(e){
+            e.preventDefault();
+            $('.search-box').slideToggle(500);
+        })
+        $('.header .search-box .close-btn').click(function(e){
+            e.preventDefault();
+            $('.search-box').slideUp(500);
+        })
+        $('.rolling-box .fa-chevron-left').click(function(e){
+             e.preventDefault();
+            if(!$('.rolling-box .product').is(':animated')){ 
+                $('.rolling-box .product').first().animate({'margin-left':'-624px'},1000,function(){
+                    $(this).detach().appendTo('.contents-box-view');
+                    $(this).removeAttr('style');   
+                });
+            }
+        })
+        $('.rolling-box .fa-chevron-right').click(function(e){
+             e.preventDefault();
+            if(!$('.rolling-box .product').is(':animated')){ 
+                $('.rolling-box .product').last().css('margin-left','-624px').detach().prependTo('.contents-box-view');
+                $('.rolling-box .product').first().animate({'margin-left':'0px'},1000);
+            }
+        })
+    </script>
+</body>
+</html>
